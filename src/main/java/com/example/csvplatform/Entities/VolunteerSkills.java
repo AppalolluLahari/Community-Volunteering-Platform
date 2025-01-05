@@ -16,6 +16,7 @@ public class VolunteerSkills {
 
     @Id
     @Column(name = "skill_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int skillId;
 
     @Column(name = "user_id")
