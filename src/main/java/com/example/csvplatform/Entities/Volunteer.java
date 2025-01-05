@@ -17,6 +17,7 @@ public class Volunteer {
 
     @Id
     @Column(name = "volunteer_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int volunteerId;
 
     @Column(name = "location", length = 100)

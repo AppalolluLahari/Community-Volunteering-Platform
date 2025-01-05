@@ -1,9 +1,6 @@
 package com.example.csvplatform.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -19,24 +16,23 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    int userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
 
-    @Column(name = "name", nullable = false)
-    String name;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "email",unique = true)
-    String email;
+    @Column(unique = true,nullable = false)
+    private String email;
 
-    @Column(name = "password")
-    String password;
+    private String password;
 
-    @Column(name = "phone",unique = true)
-    String phone;
+    @Column(unique = true,nullable = false)
+    private String phone;
 
-    String role;
+    private String role;
 
-    @Column(name = "verified")
-    boolean verified;
+    private boolean verified;
 
 
 

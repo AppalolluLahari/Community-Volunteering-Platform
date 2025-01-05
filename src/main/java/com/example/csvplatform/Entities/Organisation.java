@@ -16,6 +16,7 @@ public class Organisation {
 
     @Id
     @Column(name = "organisation_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int organisationId;
 
     @Column(name = "organisation_website", length = 50)

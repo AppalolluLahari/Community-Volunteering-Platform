@@ -1,9 +1,6 @@
 package com.example.csvplatform.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -18,6 +15,7 @@ import lombok.*;
 public class TaskReqSkills {
     @Id
     @Column(name = "skill_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int skillId;
 
     @Column(name = "task_id")
