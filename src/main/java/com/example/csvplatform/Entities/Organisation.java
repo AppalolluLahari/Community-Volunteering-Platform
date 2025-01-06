@@ -25,4 +25,8 @@ public class Organisation {
     @Column(name = "organisation_location", length = 100)
     private String organisationLocation;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 }
