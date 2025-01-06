@@ -23,5 +23,9 @@ public class Volunteer {
     @Column(name = "location", length = 100)
     private String location;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 
 }

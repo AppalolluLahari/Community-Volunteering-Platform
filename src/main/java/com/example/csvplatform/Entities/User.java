@@ -34,4 +34,25 @@ public class User {
 
     private boolean verified;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Volunteer volunteer;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Organisation organisation;
+
+    public void setVolunteer(Volunteer volunteer) {
+        this.volunteer = volunteer;
+        if (volunteer != null) {
+            volunteer.setUser(this);
+        }
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
+        if (organisation != null) {
+            organisation.setUser(this);
+        }
+    }
+
+
 }

@@ -25,5 +25,4 @@ public class VolunteerSkills {
     @Column(name = "skill_name", length = 100)
     private String skillName;
 
-
 }
