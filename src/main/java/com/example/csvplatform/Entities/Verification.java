@@ -20,8 +20,9 @@ public class Verification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int verificationId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "verification_code", length = 5)
     private String verificationCode;
@@ -31,6 +32,8 @@ public class Verification {
 
     @Column(name = "valid_till")
     private LocalDateTime validTill;
+
+
 
 
 }

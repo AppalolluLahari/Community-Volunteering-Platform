@@ -3,6 +3,7 @@ package com.example.csvplatform.Entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
 
 @Entity
@@ -27,5 +28,7 @@ public class Volunteer {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "volunteer", cascade = CascadeType.ALL)
+    private List<VolunteerSkills> volunteerSkills;
 
 }

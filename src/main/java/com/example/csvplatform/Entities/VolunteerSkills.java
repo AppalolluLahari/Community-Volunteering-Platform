@@ -19,8 +19,9 @@ public class VolunteerSkills {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int skillId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "volunteer_id")
+    private Volunteer volunteer;
 
     @Column(name = "skill_name", length = 100)
     private String skillName;
