@@ -12,9 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrganisationDto {
 
-    @NotEmpty(message = "Organisation ID cannot be empty")
-    private int organisationId;
-
     @NotEmpty(message = "Organisation website cannot be empty")
     private String organisationWebsite;
 

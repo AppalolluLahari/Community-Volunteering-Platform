@@ -12,9 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VolunteerDto {
 
-    @NotEmpty(message = "Volunteer ID cannot be empty")
-    private int volunteerId;
-
     @NotEmpty(message = "Location cannot be empty")
     private String location;
 }

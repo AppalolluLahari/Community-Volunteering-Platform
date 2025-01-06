@@ -12,9 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VolunteerSkillsDto {
 
-    @NotEmpty(message = "Skill ID cannot be empty")
-    private int skillId;
-
     @NotEmpty(message = "User ID cannot be empty")
     private int userId;
 
