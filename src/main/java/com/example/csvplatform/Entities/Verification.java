@@ -1,4 +1,4 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,10 +27,10 @@ public class Verification {
     @Column(name = "verification_code", length = 5)
     private String verificationCode;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "valid_till")
+    @Column(name = "valid_till", nullable = false)
     private LocalDateTime validTill;
 
 

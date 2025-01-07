@@ -1,12 +1,11 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.*;
-
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.JOINED)
 @ToString
 @Getter
 @Setter
@@ -19,7 +18,7 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
+    protected int userId;
 
     @Column(nullable = false)
     private String name;
@@ -27,36 +26,39 @@ public class User {
     @Column(unique = true,nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     @Column(unique = true,nullable = false)
     private String phone;
 
+    @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false)
     private boolean verified;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Volunteer volunteer;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Volunteer volunteer;
+//
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Organisation organisation;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Organisation organisation;
 
 
-
-    public void setVolunteer(Volunteer volunteer) {
-        this.volunteer = volunteer;
-        if (volunteer != null) {
-            volunteer.setUser(this);
-        }
-    }
-
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = organisation;
-        if (organisation != null) {
-            organisation.setUser(this);
-        }
-    }
+//    public void setVolunteer(Volunteer volunteer) {
+//        this.volunteer = volunteer;
+//        if (volunteer != null) {
+//            volunteer.setUser(this);
+//        }
+//    }
+//
+//    public void setOrganisation(Organisation organisation) {
+//        this.organisation = organisation;
+//        if (organisation != null) {
+//            organisation.setUser(this);
+//        }
+//    }
 
 
 }

@@ -1,7 +1,8 @@
-package com.example.csvplatform.Dtos;
+package com.example.csvplatform.dtos;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,10 +30,12 @@ public class TaskDto {
     @NotEmpty(message = "Category cannot be empty")
     private String category;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdDate;
 
     @NotEmpty(message = "Status cannot be empty")
     private String status;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime endDate;
 }

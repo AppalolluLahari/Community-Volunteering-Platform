@@ -1,4 +1,4 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

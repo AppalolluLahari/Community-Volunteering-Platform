@@ -1,7 +1,10 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -9,15 +12,11 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Builder
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "organisation")
-public class Organisation {
+public class Organisation extends User {
 
-    @Id
-    @Column(name = "organisation_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int organisationId;
+    private int organisationId = super.userId;
 
     @Column(name = "organisation_website", length = 50)
     private String organisationWebsite;
@@ -25,8 +24,7 @@ public class Organisation {
     @Column(name = "organisation_location", length = 100)
     private String organisationLocation;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
 
 }

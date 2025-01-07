@@ -1,4 +1,4 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,21 +12,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Builder
-public class Volunteer {
+@EqualsAndHashCode(callSuper = false)
+public class Volunteer extends User{
 
-    @Id
-    @Column(name = "volunteer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int volunteerId;
+
+    private int volunteerId = super.userId;
 
     @Column(name = "location", length = 100)
     private String location;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @OneToMany(mappedBy = "volunteer", cascade = CascadeType.ALL)
     private List<VolunteerSkills> volunteerSkills;

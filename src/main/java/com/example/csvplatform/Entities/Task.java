@@ -1,4 +1,4 @@
-package com.example.csvplatform.Entities;
+package com.example.csvplatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,8 +20,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int taskId;
 
-    @Column(name = "organisation_id")
-    private int organisationId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organisation_id")
+    private Organisation organisation;
 
     private String title;
 
