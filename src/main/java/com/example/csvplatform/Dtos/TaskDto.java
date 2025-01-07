@@ -1,4 +1,4 @@
-package com.example.csvplatform.Dtos;
+package com.example.csvplatform.dtos;
 
 import java.time.LocalDateTime;
 
