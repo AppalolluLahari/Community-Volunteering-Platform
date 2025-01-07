@@ -30,7 +30,7 @@ public class TaskDto {
     @NotEmpty(message = "Category cannot be empty")
     private String category;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDateTime createdDate;
 
     @NotEmpty(message = "Status cannot be empty")

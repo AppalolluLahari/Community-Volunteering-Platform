@@ -1,9 +1,25 @@
 package com.example.csvplatform.entities;
+<<<<<<< HEAD
 
 import jakarta.persistence.*;
 import lombok.*;
+=======
+>>>>>>> 2edd5c31544680f072f7379e2c12ba4ba52b8664
 
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
