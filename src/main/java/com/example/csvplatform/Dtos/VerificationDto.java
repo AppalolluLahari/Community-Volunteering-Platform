@@ -14,9 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VerificationDto {
 
-    @NotEmpty(message = "Verification ID cannot be empty")
-    private int verificationId;
-
     @NotEmpty(message = "User ID cannot be empty")
     private int userId;
 

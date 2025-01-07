@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.*;
+
 @Entity
 @Table(name = "user")
 @ToString
@@ -47,11 +49,13 @@ public class User {
 
     private boolean verified;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Volunteer volunteer;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Organisation organisation;
+
+
 
     public void setVolunteer(Volunteer volunteer) {
         this.volunteer = volunteer;

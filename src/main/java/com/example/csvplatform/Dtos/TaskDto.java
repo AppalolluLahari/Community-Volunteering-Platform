@@ -14,9 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TaskDto {
 
-    @NotEmpty(message = "Task ID cannot be empty")
-    private int taskId;
-
     @NotEmpty(message = "Organisation ID cannot be empty")
     private int organisationId;
 

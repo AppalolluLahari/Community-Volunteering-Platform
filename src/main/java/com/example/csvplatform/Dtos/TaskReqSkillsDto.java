@@ -12,9 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TaskReqSkillsDto {
 
-    @NotEmpty(message = "Skill ID cannot be empty")
-    private int skillId;
-
     @NotEmpty(message = "Task ID cannot be empty")
     private int taskId;
 
