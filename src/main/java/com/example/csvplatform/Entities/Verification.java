@@ -3,6 +3,7 @@ package com.example.csvplatform.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -41,10 +42,10 @@ public class Verification {
     private String verificationCode;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "valid_till", nullable = false)
-    private LocalDateTime validTill;
+    private LocalDate validTill;
 
 
 

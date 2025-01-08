@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,8 +34,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organisation_id")
+    @ManyToOne
+    @JoinColumn(name = "organisation_id", nullable = false)
     private Organisation organisation;
 
     private String title;
@@ -47,11 +47,11 @@ public class Task {
     private String category;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     private String status;
 
     @Column(name = "end_date")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
 }

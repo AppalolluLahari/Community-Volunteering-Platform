@@ -28,6 +28,7 @@ public class Organisation extends User {
     private String organisationLocation;
 
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "organisation_id")
     private List<Task> tasks = new ArrayList<>();
 
 }

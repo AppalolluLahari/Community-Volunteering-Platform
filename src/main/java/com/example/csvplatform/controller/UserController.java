@@ -1,5 +1,6 @@
 package com.example.csvplatform.controller;
 
+import com.example.csvplatform.dtos.UserDto;
 import com.example.csvplatform.dtos.VolunteerDto;
 import com.example.csvplatform.services.UserServices;
 import jakarta.annotation.Nullable;
@@ -8,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RestController
@@ -22,12 +20,22 @@ public class UserController {
     UserServices userServices;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid VolunteerDto registrationDTO) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserDto registrationDTO) {
         try {
-            userServices.createVolunteer(registrationDTO);
+            userServices.registerUser(registrationDTO);
             return ResponseEntity.ok("Registration successful");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed");
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+        try {
+            userServices.deleteUser(id);
+            return ResponseEntity.ok("Deleted successful");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Deletion failed");
         }
     }
 
