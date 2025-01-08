@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VolunteerDto {
+public class VolunteerDto extends UserDto {
 
     @NotEmpty(message = "Location cannot be empty")
     private String location;

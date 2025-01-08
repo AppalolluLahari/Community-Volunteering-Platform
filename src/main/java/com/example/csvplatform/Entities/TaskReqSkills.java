@@ -25,7 +25,7 @@ import lombok.Setter;
 public class TaskReqSkills {
     @Id
     @Column(name = "skill_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int skillId;
 
     @Column(name = "task_id")

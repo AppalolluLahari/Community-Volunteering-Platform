@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrganisationDto {
+public class OrganisationDto extends VolunteerDto {
 
     @NotEmpty(message = "Organisation website cannot be empty")
     private String organisationWebsite;
