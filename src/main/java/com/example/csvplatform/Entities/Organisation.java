@@ -1,5 +1,6 @@
 package com.example.csvplatform.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -29,6 +30,7 @@ public class Organisation extends User {
 
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "organisation_id")
+    @JsonManagedReference
     private List<Task> tasks = new ArrayList<>();
 
 }

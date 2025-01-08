@@ -11,7 +11,7 @@ public interface TaskServices {
 
      void createTask (TaskDto task);
      void deleteTask (Integer task_id);
-     void updateTask (Task task);
+     void updateTask (Integer task_id,TaskDto taskDto );
 //     void updateStatus (Integer task_id,String status);
 //     List<Task> getTasks ();
 //     List<Task> searchTask (Integer task_id);

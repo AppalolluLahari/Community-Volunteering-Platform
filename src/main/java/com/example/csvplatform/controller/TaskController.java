@@ -5,6 +5,7 @@ import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.services.TaskServices;
 import jakarta.validation.Valid;
+import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +39,13 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Deletion failed");
         }
     }
-    @PutMapping("/updateTask")
-    public ResponseEntity<?> updateTask (@RequestBody Task task) {
+    @PutMapping("/updateTask/{id}")
+    public ResponseEntity<?> updateTask (@PathVariable Integer id,@RequestBody TaskDto task) {
         try {
-            taskServices.updateTask(task);
+            taskServices.updateTask(id,task);
             return ResponseEntity.ok("Task updated successfully");
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task updation failed");
         }
     }
