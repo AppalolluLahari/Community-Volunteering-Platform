@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -55,25 +56,18 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public void deleteUser(Integer userId) {
-//        User user = organisationRepository.findById(userId)
-//                .orElseThrow(() -> new IllegalArgumentException("User with ID " + userId + " not found"));
-
         userRepository.deleteById(userId);
     }
 
-//    @Override
-//    public void updateUser(UserDto user) {
-//        Organisation organisation = organisationRepository.findById(organisationId)
-//                .orElseThrow(() -> new IllegalArgumentException("Organisation with ID " + organisationId + " not found"));
-//
-//        // Update the fields
-//        organisation.setOrganisationWebsite(website);
-//        organisation.setOrganisationLocation(location);
-//
-//        // Save the updated organisation
-//        return organisationRepository.save(organisation);
-//
-//    }
+    @Override
+    public List<User> getUsers () {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public List<Organisation> getOrganisation() {
+        return organisationRepository.findAll();
+    }
 
     @Override
     public void updateUser(UserDto user){

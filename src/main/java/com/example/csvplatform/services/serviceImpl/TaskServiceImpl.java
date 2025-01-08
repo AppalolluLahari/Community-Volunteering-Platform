@@ -8,6 +8,7 @@ import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.services.TaskServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -42,7 +43,27 @@ public class TaskServiceImpl implements TaskServices {
         taskRepository.deleteById(taskId);
     }
 
-    public void updateTask(Task task) {
+
+    public void updateTask(Integer taskId,TaskDto taskDto) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new NullPointerException("Task not found with ID: " + taskId));
+        System.out.println(task);
+        System.out.println(taskId);
+        int id = taskDto.getOrganisationId();
+
+        Organisation organisation = organisationRepository.findById(id+1)
+                .orElseThrow(() -> new NullPointerException("Organisation not found with ID: " + taskDto.getOrganisationId()));
+        System.out.println(organisation);
+
+
+        task.setTitle(taskDto.getTitle());
+        task.setDescription(taskDto.getDescription());
+        task.setLocation(taskDto.getLocation());
+        task.setCategory(taskDto.getCategory());
+        task.setStatus(taskDto.getStatus());
+        task.setEndDate(taskDto.getEndDate());
+        task.setOrganisation(organisation);
         taskRepository.save(task);
     }
+
 }
