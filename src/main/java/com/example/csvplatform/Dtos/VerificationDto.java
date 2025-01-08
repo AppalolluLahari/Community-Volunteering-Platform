@@ -1,5 +1,6 @@
 package com.example.csvplatform.dtos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -20,7 +21,7 @@ public class VerificationDto {
     @NotEmpty(message = "Verification code cannot be empty")
     private String verificationCode;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
-    private LocalDateTime validTill;
+    private LocalDate validTill;
 }

@@ -17,4 +17,6 @@ public class OrganisationDto extends VolunteerDto {
 
     @NotEmpty(message = "Organisation location cannot be empty")
     private String organisationLocation;
+
+    private int organisationId;
 }

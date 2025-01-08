@@ -1,13 +1,21 @@
 package com.example.csvplatform.services.serviceImpl;
 
 import com.example.csvplatform.dtos.OrganisationDto;
+import com.example.csvplatform.dtos.UserDto;
 import com.example.csvplatform.dtos.VolunteerDto;
+import com.example.csvplatform.entities.Organisation;
+import com.example.csvplatform.entities.Task;
+import com.example.csvplatform.entities.User;
 import com.example.csvplatform.entities.Volunteer;
+import com.example.csvplatform.repositories.OrganisationRepository;
+import com.example.csvplatform.repositories.UserRepository;
 import com.example.csvplatform.repositories.VolunteerRepository;
 import com.example.csvplatform.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -15,46 +23,60 @@ public class UserServiceImpl implements UserServices {
     @Autowired
     VolunteerRepository volunteerRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    OrganisationRepository organisationRepository;
+
     @Override
-    public void createVolunteer(VolunteerDto user) {
-        Volunteer volunteer = new Volunteer();
-        volunteer.setName(user.getName());
-        volunteer.setEmail(user.getEmail());
-        volunteer.setPhone(user.getPhone());
-        volunteer.setPassword(user.getPassword());  // Encode password
-        volunteer.setRole(user.getRole());
-        volunteer.setVerified(user.isVerified());
-        volunteer.setLocation("Unknown Location");  // Set a default or handle as needed
-        volunteerRepository.save(volunteer);
+    public void registerUser(UserDto user) {
+        if(("Volunteer").equalsIgnoreCase(user.getRole())) {
+            Volunteer volunteer = new Volunteer();
+            volunteer.setName(user.getName());
+            volunteer.setEmail(user.getEmail());
+            volunteer.setPhone(user.getPhone());
+            volunteer.setPassword(user.getPassword());
+            volunteer.setRole(user.getRole());
+            volunteer.setVerified(user.isVerified());
+            volunteerRepository.save(volunteer);
+        }
+        else {
+            Organisation organisation = new Organisation();
+            organisation.setName(user.getName());
+            organisation.setEmail(user.getEmail());
+            organisation.setPhone(user.getPhone());
+            organisation.setPassword(user.getPassword());
+            organisation.setRole(user.getRole());
+            organisation.setVerified(user.isVerified());
+            organisationRepository.save(organisation);
+        }
     }
 
     @Override
-    public ResponseEntity<?> createOrganisation(OrganisationDto organisation) {
-        return null;
+    public void deleteUser(Integer userId) {
+//        User user = organisationRepository.findById(userId)
+//                .orElseThrow(() -> new IllegalArgumentException("User with ID " + userId + " not found"));
+
+        userRepository.deleteById(userId);
     }
 
-    @Override
-    public ResponseEntity<?> deleteOrganisation(Integer organisation_id) {
-        return null;
-    }
+//    @Override
+//    public void updateUser(UserDto user) {
+//        Organisation organisation = organisationRepository.findById(organisationId)
+//                .orElseThrow(() -> new IllegalArgumentException("Organisation with ID " + organisationId + " not found"));
+//
+//        // Update the fields
+//        organisation.setOrganisationWebsite(website);
+//        organisation.setOrganisationLocation(location);
+//
+//        // Save the updated organisation
+//        return organisationRepository.save(organisation);
+//
+//    }
 
     @Override
-    public ResponseEntity<?> deleteVolunteer(Integer volunteer_id) {
-        return null;
-    }
+    public void updateUser(UserDto user){
 
-    @Override
-    public ResponseEntity<?> updateOrganisation(VolunteerDto organisation) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> updateVolunteer(VolunteerDto volunteer) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> getOrgTasks(Integer organisation_id) {
-        return null;
     }
 }
