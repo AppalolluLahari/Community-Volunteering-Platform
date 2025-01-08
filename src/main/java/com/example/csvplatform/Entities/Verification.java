@@ -1,10 +1,7 @@
 package com.example.csvplatform.entities;
-<<<<<<< HEAD
 
 import jakarta.persistence.*;
 import lombok.*;
-=======
->>>>>>> 2edd5c31544680f072f7379e2c12ba4ba52b8664
 
 import java.time.LocalDateTime;
 
@@ -33,7 +30,7 @@ public class Verification {
 
     @Id
     @Column(name = "verification_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int verificationId;
 
     @ManyToOne

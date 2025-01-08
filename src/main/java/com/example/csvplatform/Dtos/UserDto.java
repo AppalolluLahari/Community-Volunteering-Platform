@@ -27,6 +27,5 @@ public class UserDto {
 
     private String role;
 
-    @NotEmpty(message = "Verification Status should be mentioned")
     private boolean verified;
 }

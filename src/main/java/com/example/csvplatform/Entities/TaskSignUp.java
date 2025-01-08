@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class TaskSignUp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "signup_id")
     private int signupId;
 
