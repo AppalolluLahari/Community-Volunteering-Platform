@@ -1,11 +1,6 @@
 package com.example.csvplatform.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -28,8 +23,9 @@ public class TaskReqSkills {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int skillId;
 
-    @Column(name = "task_id")
-    private int taskId;
+    @ManyToOne
+    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
+    private Task task;
 
     @Column(name = "skill_name", length = 100)
     private String skillName;

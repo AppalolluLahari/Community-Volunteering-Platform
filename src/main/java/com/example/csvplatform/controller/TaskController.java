@@ -26,6 +26,7 @@ public class TaskController {
             taskServices.createTask(taskDto);
             return ResponseEntity.ok("Task created successfully");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task Creation failed");
         }
     }
@@ -49,4 +50,5 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task updation failed");
         }
     }
+
 }

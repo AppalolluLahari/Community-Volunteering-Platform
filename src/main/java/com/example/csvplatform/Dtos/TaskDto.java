@@ -1,8 +1,10 @@
 package com.example.csvplatform.dtos;
 
 import java.time.LocalDate;
+import java.util.List;
 // import java.time.LocalDateTime;
 
+import com.example.csvplatform.entities.TaskReqSkills;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -39,4 +41,6 @@ public class TaskDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate endDate;
+
+    private List<String> skills;
 }

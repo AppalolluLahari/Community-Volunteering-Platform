@@ -1,5 +1,8 @@
 package com.example.csvplatform.services.serviceImpl;
 
+import com.example.csvplatform.entities.Volunteer;
+import com.example.csvplatform.repositories.VolunteerRepository;
+import com.example.csvplatform.services.TaskServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.repositories.TaskSignUpRepository;
 import com.example.csvplatform.services.TaskSignUpServices;
 
+import java.time.LocalDate;
+
 @Service
 public class TaskSignUpServiceImpl implements TaskSignUpServices {
 
@@ -19,11 +24,23 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private TaskServices taskServices;
+
+    @Autowired
+    private VolunteerRepository volunteerRepository;
+
     @Override
     public void createTaskSignUp(TaskSignUpDto taskSignUpDto) {
         // Verify if the task exists
         Task task = taskRepository.findById(taskSignUpDto.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskSignUpDto.getTaskId()));
+
+        Volunteer volunteer = volunteerRepository.findById(taskSignUpDto.getVolunteerId())
+                .orElseThrow(() -> new RuntimeException("Volunteer not found with ID: " + taskSignUpDto.getVolunteerId()));
+
+        //Setting the task status to Taken
+        taskServices.updateStatus(task.getTaskId(), "Taken");
 
         // Map DTO to Entity
         TaskSignUp taskSignUp = new TaskSignUp();
@@ -41,10 +58,24 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
 
     @Override
     public void deleteTaskSignUp(Integer signUpId) {
+        //Checking for the if it exists
         if (!taskSignupRepository.existsById(signUpId)) {
             throw new RuntimeException("Task Signup not found with ID: " + signUpId);
         }
-        taskSignupRepository.deleteById(signUpId);
+
+        TaskSignUp taskSignUp = taskSignupRepository.findById(signUpId)
+                .orElseThrow(() -> new RuntimeException("Task SignUp not found with ID: " + signUpId));
+
+        LocalDate cancellationDate = taskSignUp.getCancellationDate();
+        LocalDate currDate = LocalDate.now();
+        if (cancellationDate.isBefore(currDate) || cancellationDate.isEqual(currDate)) {
+            //Deleting the task
+            taskSignupRepository.deleteById(signUpId);
+        }
+        else {
+            throw new RuntimeException("Task cannot be Cancelled");
+        }
+
     }
 
     @Override
@@ -53,7 +84,6 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
                 .orElseThrow(() -> new RuntimeException("Task Signup not found with ID: " + taskSignUpDto.getSignUpId()));
 
         // Update fields only if they are provided in the DTO
-        
             existingSignUp.setVolunteerId(taskSignUpDto.getVolunteerId());
             existingSignUp.setTaskId(taskSignUpDto.getTaskId());
             existingSignUp.setSignedUpDate(taskSignUpDto.getSignedUpDate());

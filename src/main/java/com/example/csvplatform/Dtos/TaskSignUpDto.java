@@ -23,22 +23,20 @@ public class TaskSignUpDto {
 
     private Integer SignUpId;
 
-    @NotEmpty(message = "volunteer Id cannot be empty")
     private int volunteerId;
 
-    @NotEmpty(message = "task Id cannot be empty")
     private int taskId;
 
     @NotEmpty(message = "status Id cannot be empty")
     private String status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate signedUpDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate completionDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate cancellationDate;
 
     @NotNull
