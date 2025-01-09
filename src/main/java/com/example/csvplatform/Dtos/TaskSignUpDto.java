@@ -1,10 +1,17 @@
 package com.example.csvplatform.dtos;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -13,6 +20,8 @@ import java.time.LocalDate;
 @Builder
 @ToString
 public class TaskSignUpDto {
+
+    private Integer SignUpId;
 
     @NotEmpty(message = "volunteer Id cannot be empty")
     private int volunteerId;
@@ -33,5 +42,5 @@ public class TaskSignUpDto {
     private LocalDate cancellationDate;
 
     @NotNull
-    private boolean remainderSent;
+    private Boolean remainderSent;
 }
