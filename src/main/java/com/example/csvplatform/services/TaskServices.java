@@ -13,6 +13,6 @@ public interface TaskServices {
      void deleteTask (Integer task_id);
      void updateTask (Integer task_id,TaskDto taskDto );
      void updateStatus (Integer task_id,String status);
-//     List<Task> getTasks ();
+     List<Task> getMyTasks (Integer id);
 //     List<Task> searchTask (Integer task_id);
 }

@@ -68,7 +68,7 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
 
         LocalDate cancellationDate = taskSignUp.getCancellationDate();
         LocalDate currDate = LocalDate.now();
-        if (cancellationDate.isBefore(currDate) || cancellationDate.isEqual(currDate)) {
+        if (currDate.isBefore(cancellationDate) || cancellationDate.isEqual(currDate)) {
             //Deleting the task
             taskSignupRepository.deleteById(signUpId);
         }
@@ -93,5 +93,17 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
             existingSignUp.setRemainderSent(taskSignUpDto.getRemainderSent());
 
         taskSignupRepository.save(existingSignUp);
+    }
+
+    @Override
+    public void updateTaskSignUpStatus(Integer signIpId, String status) {
+        TaskSignUp signUpDetails = taskSignupRepository.findById(signIpId)
+                .orElseThrow(() -> new RuntimeException("Task Registration not found"));
+
+        if(status.equalsIgnoreCase("completed")) {
+            signUpDetails.setCompletionDate(LocalDate.now());
+        }
+        signUpDetails.setStatus(status);
+        taskSignupRepository.save(signUpDetails);
     }
 }

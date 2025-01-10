@@ -37,9 +37,22 @@ public class TaskSignUpController {
             taskSignUpServices.deleteTaskSignUp(signUpId);
             return ResponseEntity.status(HttpStatus.OK).body("Unsigned from task Successfully");
         }catch (Exception e) {
+//            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An Error Occurred");
         }
     }
+
+    @PutMapping("/updateStatus/{signUpId}")
+    public ResponseEntity<?> updateStatus(@PathVariable Integer signUpId,@RequestParam String status) {
+        try {
+            taskSignUpServices.updateTaskSignUpStatus(signUpId,status);
+            return ResponseEntity.status(HttpStatus.OK).body("Updated the task status");
+        }catch (Exception e) {
+//            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An Error Occurred");
+        }
+    }
+
 
 
 }

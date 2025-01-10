@@ -1,7 +1,6 @@
 package com.example.csvplatform.services.serviceImpl;
 
 import com.example.csvplatform.dtos.TaskDto;
-import com.example.csvplatform.dtos.TaskReqSkillsDto;
 import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.entities.TaskReqSkills;
@@ -92,5 +91,10 @@ public class TaskServiceImpl implements TaskServices {
         //Saving the newly updated task
         taskRepository.save(task);
 
+    }
+
+    public List<Task> getMyTasks (Integer organisation_id) {
+        List<Task> tasks = taskRepository.findByOrganisationId(organisation_id);
+        return tasks;
     }
 }
