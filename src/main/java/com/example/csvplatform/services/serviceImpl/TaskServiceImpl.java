@@ -4,16 +4,20 @@ import com.example.csvplatform.dtos.TaskDto;
 import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.entities.TaskReqSkills;
+import com.example.csvplatform.entities.TaskSignUp;
 import com.example.csvplatform.repositories.OrganisationRepository;
 import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.repositories.TaskReqSkillsRepository;
+import com.example.csvplatform.repositories.TaskSignUpRepository;
 import com.example.csvplatform.services.TaskServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskServices {
@@ -26,6 +30,9 @@ public class TaskServiceImpl implements TaskServices {
 
     @Autowired
     private TaskReqSkillsRepository taskReqSkillsRepository;
+
+    @Autowired
+    private TaskSignUpRepository  taskSignUpRepository;
 
     @Override
     public void createTask(TaskDto task) {
@@ -56,8 +63,16 @@ public class TaskServiceImpl implements TaskServices {
         taskReqSkillsRepository.saveAll(skills);
     }
 
+    @Override
+    @Transactional
     public void deleteTask (Integer taskId ) {
-        taskRepository.deleteById(taskId);
+        if(taskRepository.existsById(taskId)) {
+            Optional<TaskSignUp> taskSignUp = taskSignUpRepository.findByTaskId(taskId);
+            if(taskSignUp.isPresent()) {
+                taskSignUpRepository.deleteByTaskId(taskId);
+            }
+            taskRepository.deleteById(taskId);
+        }
     }
 
 
@@ -81,6 +96,8 @@ public class TaskServiceImpl implements TaskServices {
         taskRepository.save(task);
     }
 
+
+
     @Override
     public void updateStatus(Integer taskId, String status) {
         //Get the task details
@@ -97,4 +114,5 @@ public class TaskServiceImpl implements TaskServices {
         List<Task> tasks = taskRepository.findByOrganisationId(organisation_id);
         return tasks;
     }
+
 }

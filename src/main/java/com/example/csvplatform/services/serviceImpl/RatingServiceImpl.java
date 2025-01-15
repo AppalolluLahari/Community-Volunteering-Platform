@@ -2,6 +2,9 @@ package com.example.csvplatform.services.serviceImpl;
 
 import java.util.Optional;
 
+import com.example.csvplatform.entities.Volunteer;
+import com.example.csvplatform.repositories.UserRepository;
+import com.example.csvplatform.repositories.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +24,18 @@ public class RatingServiceImpl implements RatingServices {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private VolunteerRepository volunteerRepository;
+
+
     @Override
     public void createRating(RatingDto ratingDto) {
         // Verify task existence
         Task task = taskRepository.findById(ratingDto.getTaskId())
-                .orElseThrow(() -> new NullPointerException("Task not found"));
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        Volunteer volunteer = volunteerRepository.findById(ratingDto.getRatedTo())
+                .orElseThrow(() -> new RuntimeException("volunteer not found"));
 
         // Map DTO to Entity
         Rating rating = new Rating();
@@ -35,8 +45,11 @@ public class RatingServiceImpl implements RatingServices {
         rating.setRatedTo(ratingDto.getRatedTo());
         rating.setRatedBy(ratingDto.getRatedBy());
 
-        // Save the rating
+        // Save the rating amd the volunteer changes
         ratingRepository.save(rating);
+
+        volunteer.setRatingScore(ratingRepository.findAverageRatingByVolunteerId(ratingDto.getRatedTo()));
+        volunteerRepository.save(volunteer);
     }
 
     @Override

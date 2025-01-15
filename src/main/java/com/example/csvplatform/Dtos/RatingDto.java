@@ -26,4 +26,6 @@ public class RatingDto {
 
     @NotNull(message = "Rated by cannot be null")
     private int ratedBy;
+
+
 }

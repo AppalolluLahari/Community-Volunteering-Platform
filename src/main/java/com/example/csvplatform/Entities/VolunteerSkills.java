@@ -1,5 +1,6 @@
 package com.example.csvplatform.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,8 @@ public class VolunteerSkills {
     private int skillId;
 
     @ManyToOne
-    @JoinColumn(name = "volunteer_id")
+    @JsonBackReference
+    @JoinColumn(name = "volunteer_id",referencedColumnName = "user_id")
     private Volunteer volunteer;
 
     @Column(name = "skill_name", length = 100)

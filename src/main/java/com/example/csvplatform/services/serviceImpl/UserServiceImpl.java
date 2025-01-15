@@ -1,22 +1,22 @@
 package com.example.csvplatform.services.serviceImpl;
 
-import com.example.csvplatform.dtos.OrganisationDto;
 import com.example.csvplatform.dtos.UserDto;
+import com.example.csvplatform.dtos.VolunteerDetailsDTO;
 import com.example.csvplatform.dtos.VolunteerDto;
-import com.example.csvplatform.entities.Organisation;
-import com.example.csvplatform.entities.Task;
-import com.example.csvplatform.entities.User;
-import com.example.csvplatform.entities.Volunteer;
+import com.example.csvplatform.entities.*;
 import com.example.csvplatform.repositories.OrganisationRepository;
 import com.example.csvplatform.repositories.UserRepository;
 import com.example.csvplatform.repositories.VolunteerRepository;
+import com.example.csvplatform.repositories.VolunteerSkillsRepository;
 import com.example.csvplatform.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserServices {
 
     @Autowired
     OrganisationRepository organisationRepository;
+
+    @Autowired
+    VolunteerSkillsRepository volunteerSkillsRepository;
 
     @Override
     public void registerUser(UserDto user) {
@@ -70,7 +73,36 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public void updateUser(UserDto user){
+    @Transactional
+    public void updateVolunteer(VolunteerDto volunteerDto){
+        Volunteer volunteer = volunteerRepository.findById(volunteerDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
 
+        volunteer.setName(volunteerDto.getName());
+        volunteer.setLocation(volunteerDto.getLocation());
+        volunteer.setEmail(volunteerDto.getEmail());
+        volunteerRepository.save(volunteer);
+
+        volunteerSkillsRepository.deleteByVolunteer_UserId(volunteer.getUserId());
+        List<VolunteerSkills> skills = new ArrayList<>();
+        for (String skillName : volunteerDto.getVolunteerSkills()) {
+            VolunteerSkills skill = new VolunteerSkills();
+            skill.setVolunteer(volunteer);
+            skill.setSkillName(skillName);
+            skills.add(skill);
+        }
+        volunteerSkillsRepository.saveAll(skills);
     }
+
+    @Override
+    public List<VolunteerDetailsDTO> getTop10Volunteers() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return volunteerRepository.findTop10ByRating(pageable);
+    }
+
+    @Override
+    public List<VolunteerSkills> getVolunteerSkills(Integer id) {
+        return volunteerSkillsRepository.findByUserId(id);
+    }
+
 }
