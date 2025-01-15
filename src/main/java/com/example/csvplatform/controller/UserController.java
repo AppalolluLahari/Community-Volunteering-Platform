@@ -1,8 +1,13 @@
 package com.example.csvplatform.controller;
 
+import com.example.csvplatform.dtos.TaskDto;
 import com.example.csvplatform.dtos.UserDto;
+import com.example.csvplatform.dtos.VolunteerDetailsDTO;
+import com.example.csvplatform.dtos.VolunteerDto;
 import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.User;
+import com.example.csvplatform.entities.Volunteer;
+import com.example.csvplatform.entities.VolunteerSkills;
 import com.example.csvplatform.services.UserServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +66,36 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getVolunteers/top10")
+    public ResponseEntity<?> getTop10Volunteers () {
+        try {
+            List<VolunteerDetailsDTO> volunteers = userServices.getTop10Volunteers();
+            return ResponseEntity.status(HttpStatus.OK).body(volunteers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch volunteers");
+        }
+    }
+
+    @GetMapping("/getVolunteers/skills/{volunteer_id}")
+    public ResponseEntity<?> getVolunteerSkills (Integer volunteer_id) {
+        try {
+            List<VolunteerSkills> skills = userServices.getVolunteerSkills(volunteer_id);
+            return ResponseEntity.status(HttpStatus.OK).body(skills);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch volunteers");
+        }
+    }
+
+    @PutMapping("/updateVolunteer")
+    public ResponseEntity<?> updateTask (@RequestBody @Valid VolunteerDto volunteerDto) {
+        try {
+            userServices.updateVolunteer(volunteerDto);
+            return ResponseEntity.ok("updated your details successfully");
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("updation failed");
+        }
+    }
 }
 

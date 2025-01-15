@@ -66,14 +66,19 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
         TaskSignUp taskSignUp = taskSignupRepository.findById(signUpId)
                 .orElseThrow(() -> new RuntimeException("Task SignUp not found with ID: " + signUpId));
 
+        Task task = taskRepository.findById(taskSignUp.getTaskId())
+                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskSignUp.getTaskId()));
+
+
         LocalDate cancellationDate = taskSignUp.getCancellationDate();
         LocalDate currDate = LocalDate.now();
         if (currDate.isBefore(cancellationDate) || cancellationDate.isEqual(currDate)) {
-            //Deleting the task
+            //Deleting the task registration
             taskSignupRepository.deleteById(signUpId);
+            task.setStatus("Pending");
         }
         else {
-            throw new RuntimeException("Task cannot be Cancelled");
+            throw new RuntimeException("Deadline crossed task cannot be Cancelled");
         }
 
     }

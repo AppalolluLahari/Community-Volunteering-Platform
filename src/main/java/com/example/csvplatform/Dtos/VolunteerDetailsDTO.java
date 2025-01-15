@@ -1,5 +1,6 @@
 package com.example.csvplatform.dtos;
 
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -7,13 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VolunteerDto {
+public class VolunteerDetailsDTO {
 
     private int userId;
 
@@ -28,12 +27,8 @@ public class VolunteerDto {
 
     private String role;
 
-    private boolean verified;
-
     @NotEmpty(message = "Location cannot be empty")
     private String location;
 
-    private int ratingScore;
-
-    private List<String> volunteerSkills;
+    private Double ratingScore;
 }

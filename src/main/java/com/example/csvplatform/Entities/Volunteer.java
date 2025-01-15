@@ -2,6 +2,9 @@ package com.example.csvplatform.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +36,9 @@ public class Volunteer extends User{
     private String location;
 
     @OneToMany(mappedBy = "volunteer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<VolunteerSkills> volunteerSkills;
 
+    @Column(name = "rating_score")
+    private Double ratingScore;
 }

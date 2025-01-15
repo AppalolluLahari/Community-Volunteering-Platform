@@ -37,7 +37,7 @@ public class TaskSignUpController {
             taskSignUpServices.deleteTaskSignUp(signUpId);
             return ResponseEntity.status(HttpStatus.OK).body("Unsigned from task Successfully");
         }catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An Error Occurred");
         }
     }
