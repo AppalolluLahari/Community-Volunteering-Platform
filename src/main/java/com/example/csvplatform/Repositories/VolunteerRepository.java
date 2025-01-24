@@ -21,5 +21,6 @@ public interface VolunteerRepository extends JpaRepository<Volunteer,Integer> {
                 "FROM Volunteer v " +
                 "ORDER BY v.ratingScore DESC")
         List<VolunteerDetailsDTO> findTop10ByRating(Pageable pageable);
+        Volunteer findByEmail(String email);
 
 }
