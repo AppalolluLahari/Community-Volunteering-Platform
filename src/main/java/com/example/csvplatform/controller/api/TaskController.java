@@ -1,11 +1,9 @@
-package com.example.csvplatform.controller;
+package com.example.csvplatform.controller.api;
 
 import com.example.csvplatform.dtos.TaskDto;
 import com.example.csvplatform.entities.Task;
-import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.services.TaskServices;
 import jakarta.validation.Valid;
-import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

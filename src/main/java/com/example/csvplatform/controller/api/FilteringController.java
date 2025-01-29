@@ -1,6 +1,5 @@
-package com.example.csvplatform.controller;
+package com.example.csvplatform.controller.api;
 
-import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.services.FilteringServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

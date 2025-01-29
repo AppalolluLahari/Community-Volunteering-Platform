@@ -1,12 +1,10 @@
-package com.example.csvplatform.controller;
+package com.example.csvplatform.controller.api;
 
-import com.example.csvplatform.dtos.TaskDto;
 import com.example.csvplatform.dtos.UserDto;
 import com.example.csvplatform.dtos.VolunteerDetailsDTO;
 import com.example.csvplatform.dtos.VolunteerDto;
 import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.User;
-import com.example.csvplatform.entities.Volunteer;
 import com.example.csvplatform.entities.VolunteerSkills;
 import com.example.csvplatform.services.UserServices;
 import jakarta.validation.Valid;

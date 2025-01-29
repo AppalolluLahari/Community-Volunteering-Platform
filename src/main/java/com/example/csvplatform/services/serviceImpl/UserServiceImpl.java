@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserServices {
             volunteer.setEmail(user.getEmail());
             volunteer.setPhone(user.getPhone());
             volunteer.setPassword(user.getPassword());
-            volunteer.setRole(user.getRole());
+            volunteer.setRole(user.getRole().toUpperCase());
             volunteer.setVerified(user.isVerified());
             volunteerRepository.save(volunteer);
         }

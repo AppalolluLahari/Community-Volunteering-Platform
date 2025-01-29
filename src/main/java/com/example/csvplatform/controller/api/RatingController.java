@@ -1,4 +1,4 @@
-package com.example.csvplatform.controller;
+package com.example.csvplatform.controller.api;
 
 import com.example.csvplatform.dtos.RatingDto;
 import com.example.csvplatform.services.RatingServices;

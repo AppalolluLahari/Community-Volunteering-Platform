@@ -1,4 +1,4 @@
-package com.example.csvplatform.controller;
+package com.example.csvplatform.controller.api;
 
 import com.example.csvplatform.dtos.TaskSignUpDto;
 import com.example.csvplatform.services.TaskServices;

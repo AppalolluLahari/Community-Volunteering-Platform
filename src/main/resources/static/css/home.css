@@ -39,7 +39,7 @@ background-color: #f8f9fa !important;
 }
 
 .bg-image {
-background-image: url("../organisation/wmremove-transformed-L8_G3hYjB-transformed.jpeg"); /* Replace with your image URL */
+background-image: url("/images/wmremove-transformed.jpeg"); /* Replace with your image URL */
 background-size: cover;
 background-position: center;
 height: 70vh; /* Full viewport height */
