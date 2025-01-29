@@ -27,7 +27,7 @@
     }
 
     .container-custom {
-      /* background: #ffffff; */
+    
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -51,14 +51,12 @@
     
     .btn.show  {
       border: none !important;
-    }
-    
-    .btn.show {
       background-color: #f8f9fa !important;
     }
     
+    
     .bg-image {
-      background-image: url("../wmremove-transformed.jpeg"); /* Replace with your image URL */
+      background-image: url("/images/wmremove-transformed.jpeg"); /* Replace with your image URL */
       background-size: cover;
       background-position: center;
       height: 70vh; /* Full viewport height */
