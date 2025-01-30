@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Rating Page</title>
+    <title>Task Rating</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="./organisation-home.css">
+    <link rel="stylesheet" th:href="@{/css/organisation-home.css}">
     <style>
         body {
             background-color: #f8f9fa;
@@ -71,82 +72,28 @@
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar custom-navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6j95mDNtjlabAxUewbAcxvJnU9w4P7Iu0Og&s" alt="Logo" class="logoimg" style="width: 50px; height: 50px; border-radius: 10px;">
-                <span class="ms-2">Volunteer Platform</span>
-            </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./organisation-home.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./my-tasks.html">Tasks</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- <a class="nav-link" href="./taskRating.html">Rating</a> -->
-                            <div class="dropdown-center ">
-                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Rating
-                                </button>
-                                <ul class="dropdown-menu custom-dropdown-center">
-                                  <li><a class="dropdown-item" href="./my-ratings.html">My Ratings</a></li>
-                                  <li><a class="dropdown-item" href="./completed-tasks.html">Rate Task</a></li>
-                                  <li><a class="dropdown-item" href="./top-volunteers.html">Top Volunteers</a></li>
-                                </ul> 
-                              </div>
-                        </li>
-                        <li class="nav-item d-lg-none">
-                            <div class="dropdown-center">
-                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    More
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
-                                    <li><a class="dropdown-item" href="../home.html" >Logout</a></li>
-                                </ul>
-                              </div>
-                        </li>
 
-                    </ul>
-                    
-                </div>
-                <div class="dropdown-center d-none d-lg-block">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        More
-                    </button>
-                    <ul class="dropdown-menu custom-dropdown">
-                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
-                        <li><a class="dropdown-item" href="../home.html" >Logout</a></li>
-                    </ul>
-                  </div>
-        </div>
-
-    </nav>
+    <div th:replace="~{organisation/fragments :: navbar}"></div>
 
     <div class="rating-page">
         <h1>Task Rating</h1>
         <form action="#" method="POST">
             <div class="mb-3">
                 <label for="taskId" class="form-label">Task ID</label>
-                <input type="text" class="form-control" id="taskId" name="taskId" placeholder="Enter Task ID" value = "13" readonly required>
+                <input type="text" class="form-control" id="taskId" name="taskId" th:value="${taskId}" readonly required>
             </div>
             <div class="mb-3">
                 <label for="ratingTo" class="form-label">Rating To</label>
-                <input type="text" class="form-control" id="ratingTo" name="ratingTo" placeholder="Enter Id" value = "107" readonly required>
+                <input type="text" class="form-control" id="ratingTo" name="ratingTo" th:value="${ratingTo}" readonly required>
             </div>
             <div class="mb-3">
                 <label for="ratingBy" class="form-label">Rating By</label>
-                <input type="text" class="form-control" id="ratingBy" name="ratingBy" placeholder="Enter your Id" value="109" readonly required>
+                <input type="text" class="form-control" id="ratingBy" name="ratingBy" th:value="${ratingBy}" readonly required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Rating Score</label>
+                <label class="form-label" for="rating score">Rating Score</label>
                 <div class="rating-stars" id="ratingStars">
                     <i class="bi bi-star" data-value="1"></i>
                     <i class="bi bi-star" data-value="2"></i>
@@ -161,11 +108,13 @@
             </div>
             <div class="mb-3">
                 <label for="review" class="form-label">Review</label>
-                <textarea class="form-control" id="review" name="review" rows="4" placeholder="Write your review here..." required></textarea>
+                <textarea class="form-control" id="review" name="review" rows="4" placeholder="Write your review here..." required th:text="${review}"></textarea>
             </div>
             <button type="submit" class="submit-btn">Submit Rating</button>
         </form>
     </div>
+
+    <div th:replace="~{organisation/fragments :: footer}"></div>
 
     <script>
         const stars = document.querySelectorAll('.rating-stars i');
@@ -174,22 +123,19 @@
 
         stars.forEach(star => {
             star.addEventListener('click', () => {
-                
                 stars.forEach(s => s.classList.remove('active'));
-
-                
                 const value = star.getAttribute('data-value');
-                ratingScoreInput.value = value; 
-                selectedScore.textContent = value; 
+                ratingScoreInput.value = value;
+                selectedScore.textContent = value;
 
-                
                 for (let i = 0; i < value; i++) {
                     stars[i].classList.add('active');
                 }
             });
         });
     </script>
-    <script src="./index.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

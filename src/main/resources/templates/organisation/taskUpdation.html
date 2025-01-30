@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Updation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./organisation-home.css">
+    <link rel="stylesheet" th:href="@{/css/organisation-home.css}">
     <style>
         main {
             min-height: 82vh;
@@ -41,104 +41,54 @@
 </head>
 
 <body>
-    <nav class="navbar custom-navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6j95mDNtjlabAxUewbAcxvJnU9w4P7Iu0Og&s" alt="Logo" class="logoimg" style="width: 50px; height: 50px; border-radius: 10px;">
-                <span class="ms-2">Volunteer Platform</span>
-            </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./organisation-home.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./my-tasks.html">Tasks</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- <a class="nav-link" href="./taskRating.html">Rating</a> -->
-                            <div class="dropdown-center ">
-                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Rating
-                                </button>
-                                <ul class="dropdown-menu custom-dropdown-center">
-                                  <li><a class="dropdown-item" href="./my-ratings.html">My Ratings</a></li>
-                                  <li><a class="dropdown-item" href="./completed-tasks.html">Rate Task</a></li>
-                                  <li><a class="dropdown-item" href="./top-volunteers.html">Top Volunteers</a></li>
-                                </ul> 
-                              </div>
-                        </li>
-                        <li class="nav-item d-lg-none">
-                            <div class="dropdown-center">
-                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    More
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
-                                    <li><a class="dropdown-item" href="../home.html" >Logout</a></li>
-                                </ul>
-                              </div>
-                        </li>
 
-                    </ul>
-                    
-                </div>
-                <div class="dropdown-center d-none d-lg-block">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        More
-                    </button>
-                    <ul class="dropdown-menu custom-dropdown">
-                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
-                        <li><a class="dropdown-item" href="../home.html" >Logout</a></li>
-                    </ul>
-                  </div>
-        </div>
-
-    </nav>
+    <div th:replace="~{organisation/fragments :: navbar}"></div>
 
     <main>
         <div class="task-form-container">
             <h3 class="text-center mb-4">Update Task</h3>
-            <form id="taskUpdationForm" action="#" method="POST">
+            <form id="taskUpdationForm" th:action="@{/task/updation}" method="POST">
                 <div class="form-group">
                     <label for="taskId">Task ID</label>
-                    <input type="text" id="taskId" name="taskId" class="form-control" placeholder="Enter task ID" readonly value="101" required>
+                    <input type="text" id="taskId" name="taskId" class="form-control" placeholder="Enter task ID" readonly th:value="${task.id}" required>
                 </div>
                 <div class="form-group">
                     <label for="taskTitle">Task Title</label>
-                    <input type="text" id="taskTitle" name="taskTitle" class="form-control" placeholder="Enter updated task title" required value="AI Development">
+                    <input type="text" id="taskTitle" name="taskTitle" class="form-control" placeholder="Enter updated task title" th:value="${task.title}" required>
                 </div>
                 <div class="form-group">
                     <label for="taskDescription">Task Description</label>
-                    <textarea id="taskDescription" name="taskDescription" class="form-control" rows="4" placeholder="Enter updated task description" required>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Update task description here.</textarea>
+                    <textarea id="taskDescription" name="taskDescription" class="form-control" rows="4" placeholder="Enter updated task description" required th:text="${task.description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="taskCategory">Category</label>
                     <select id="taskCategory" name="taskCategory" class="form-select" required>
-                        <option value="Software Development" selected>Software Development</option>
-                        <option value="Teaching">Teaching</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Community Service">Community Service</option>
+                        <option value="" th:selected="${task.category == null}" disabled>Select a category</option>
+                        <option value="Software Development" th:selected="${task.category == 'Software Development'}">Software Development</option>
+                        <option value="Teaching" th:selected="${task.category == 'Teaching'}">Teaching</option>
+                        <option value="Healthcare" th:selected="${task.category == 'Healthcare'}">Healthcare</option>
+                        <option value="Community Service" th:selected="${task.category == 'Community Service'}">Community Service</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="taskSkills">Required Skills</label>
-                    <input type="text" id="taskSkills" name="taskSkills" class="form-control" placeholder="E.g., Java, Python, First Aid" required value="Java, Python, Machine Learning">
+                    <input type="text" id="taskSkills" name="taskSkills" class="form-control" placeholder="E.g., Java, Python, First Aid" required th:value="${task.skills}">
                 </div>
                 <div class="form-group">
                     <label for="taskLocation">Location</label>
-                    <input type="text" id="taskLocation" name="taskLocation" class="form-control" placeholder="Enter updated task location" required value="San Francisco">
+                    <input type="text" id="taskLocation" name="taskLocation" class="form-control" placeholder="Enter updated task location" required th:value="${task.location}">
                 </div>
                 <div class="form-group">
                     <label for="taskStartDate">Start Date</label>
-                    <input type="date" id="taskStartDate" name="taskStartDate" class="form-control" required value="2025-01-15">
+                    <input type="date" id="taskStartDate" name="taskStartDate" class="form-control" required th:value="${task.startDate}">
                 </div>
                 <div class="form-group">
                     <label for="taskEndDate">End Date</label>
-                    <input type="date" id="taskEndDate" name="taskEndDate" class="form-control" required value="2025-01-31">
+                    <input type="date" id="taskEndDate" name="taskEndDate" class="form-control" required th:value="${task.endDate}">
+                </div>
+                <div class="form-group">
+                    <label for="taskCancellationDeadline">Cancellation Deadline</label>
+                    <input type="date" id="taskCancellationDeadline" name="taskCancellationDeadline" class="form-control" required th:value="${task.cancellationDeadline}">
                 </div>
                 <div class="btn-container mt-4">
                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -148,9 +98,7 @@
         </div>
     </main>
 
-    <footer class="bg-light text-center py-3">
-        <p class="mb-0">© 2025 Community Volunteering Platform. All rights reserved.</p>
-    </footer>
+    <div th:replace="~{organisation/fragments :: footer}"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
