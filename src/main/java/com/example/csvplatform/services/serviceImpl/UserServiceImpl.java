@@ -12,6 +12,7 @@ import com.example.csvplatform.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserServices {
     @Autowired
     VolunteerSkillsRepository volunteerSkillsRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void registerUser(UserDto user) {
         if(("Volunteer").equalsIgnoreCase(user.getRole())) {
@@ -40,7 +44,7 @@ public class UserServiceImpl implements UserServices {
             volunteer.setName(user.getName());
             volunteer.setEmail(user.getEmail());
             volunteer.setPhone(user.getPhone());
-            volunteer.setPassword(user.getPassword());
+            volunteer.setPassword(passwordEncoder.encode(user.getPassword()));
             volunteer.setRole(user.getRole().toUpperCase());
             volunteer.setVerified(user.isVerified());
             volunteerRepository.save(volunteer);
@@ -50,7 +54,7 @@ public class UserServiceImpl implements UserServices {
             organisation.setName(user.getName());
             organisation.setEmail(user.getEmail());
             organisation.setPhone(user.getPhone());
-            organisation.setPassword(user.getPassword());
+            organisation.setPassword(passwordEncoder.encode(user.getPassword()));
             organisation.setRole(user.getRole());
             organisation.setVerified(user.isVerified());
             organisationRepository.save(organisation);

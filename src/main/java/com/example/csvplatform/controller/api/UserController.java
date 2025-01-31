@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
@@ -85,7 +85,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/updateVolunteer")
+    @PostMapping("/updateVolunteer")
     public ResponseEntity<?> updateTask (@RequestBody @Valid VolunteerDto volunteerDto) {
         try {
             userServices.updateVolunteer(volunteerDto);
