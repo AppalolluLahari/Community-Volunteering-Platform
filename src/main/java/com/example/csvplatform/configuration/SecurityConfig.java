@@ -1,17 +1,13 @@
 package com.example.csvplatform.configuration;
 
 import com.example.csvplatform.services.serviceImpl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -23,10 +19,13 @@ public class SecurityConfig  {
 
     private final UserDetailsServiceImpl userDetailsService;
 
+    private final CustomSuccessHandler customSuccessHandler;
+
     public SecurityConfig(UserDetailsServiceImpl userDetailsService,
-                                    PasswordEncoder passwordEncoder) {
+                          PasswordEncoder passwordEncoder, CustomSuccessHandler customSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
+        this.customSuccessHandler = customSuccessHandler;
     }
 
 
@@ -46,7 +45,8 @@ public class SecurityConfig  {
                 .securityMatcher("/organization/**","/auth/**")
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/organisationlogin","/register","/css/**","/images/**","/js/**","/auth/**").permitAll()
+                        .requestMatchers("/home","/organisationlogin","/volunteer_login","/organisation_login","/register","/css/**","/images/**","/js/**","/auth/**").permitAll()
+                        .requestMatchers("/task/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -71,8 +71,8 @@ public class SecurityConfig  {
     public SecurityFilterChain volunteerFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/volunteerlogin","/register","/css/**","/images/**","/js/**","/auth/**").permitAll()
-                        .requestMatchers("/volunteer/**").hasRole("VOLUNTEER")
+                        .requestMatchers("/home","/organisationlogin","/volunteerlogin","/volunteer_login","/register","/css/**","/images/**","/js/**","/auth/**").permitAll()
+                        .requestMatchers("/task/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
@@ -80,6 +80,7 @@ public class SecurityConfig  {
                         .loginPage("/volunteerlogin")
                         .loginProcessingUrl("/volunteer_login")
                         .defaultSuccessUrl("/volunteer/home")
+                        .successHandler(customSuccessHandler)
                         .usernameParameter("email")  // Match your form field
                         .passwordParameter("password")
                 )

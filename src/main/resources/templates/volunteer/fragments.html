@@ -37,7 +37,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
                                     <li><a class="dropdown-item" th:href="@{/volunteer/my_tasks}">My Tasks</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/home}"><button class="btn btn-danger">Logout</button></a></li>
+                                    <li><a class="dropdown-item" th:href="@{/volunteer/logout}"><button class="btn btn-danger">Logout</button></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -52,12 +52,62 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>
                         <li><a class="dropdown-item" th:href="@{/volunteer/my_tasks}">My Tasks</a></li>
-                        <li><a class="dropdown-item" th:href="@{/home}"><button class="btn btn-danger">Logout</button></a></li>
+                        <li><a class="dropdown-item" th:href="@{/}"><button class="btn btn-danger">Logout</button></a></li>
                     </ul>
                 </div>
             </div>
 
         </nav>
+        <div th:fragment = "profilepage" class="modal fade" tabindex="-1" id="userProfileModalLabel" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">My Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="userProfileForm"  method="post">
+
+                            <!-- Use Elvis operator (?:) for safe null handling -->
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">User ID</span>
+                                <input type="text" id="userId" name="userId" th:value="${session?.user?.userId ?: ''}" class="form-control" readonly>
+                            </div>
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">Name</span>
+                                <input type="text" id="userName" name="name" th:value="${session?.user?.name ?: ''}" class="form-control" readonly>
+                                <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
+                            </div>
+                            <!-- Continue with other fields using the same pattern -->
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">Email</span>
+                                <input type="email" id="userEmail" name="email" th:value="${session?.user?.email ?: ''}" class="form-control" readonly>
+                            </div>
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">Phone</span>
+                                <input type="text" id="userPhone" name="phone" th:value="${session?.user?.phone ?: ''}" class="form-control" readonly>
+                                <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
+                            </div>
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">Role</span>
+                                <input type="text" id="userRole" name="role" th:value="${session?.user?.role ?: ''}" class="form-control" readonly>
+                            </div>
+                            <div class="input-group mb-3" style="width: 100%; margin: 10px;">
+                                <span class="input-group-text" style="width: 20%;">Location</span>
+                                <input type="text" id="userLocation" name="location" th:value="${session?.user?.location ?: ''}" class="form-control" readonly>
+                                <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" >Change Password</button>
+                        <button type="button" class="btn btn-danger" >Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div th:fragment="footer" >
             <footer class="bg-light text-center py-3 ">
                 <p class="mb-0">© 2025 Community Volunteering Platform. All rights reserved.</p>

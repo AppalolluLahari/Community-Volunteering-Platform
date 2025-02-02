@@ -51,14 +51,25 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/getAllTasks/{organisation_id}")
+    @GetMapping("/getMyTasks/{organisation_id}")
     public ResponseEntity<?> getAllTasksById (@PathVariable Integer organisation_id) {
         try {
             List<Task> tasks  =  taskServices.getMyTasks(organisation_id);
             return ResponseEntity.status(HttpStatus.OK).body(tasks);
         } catch (Exception e) {
             System.out.println(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task updation failed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch Tasks");
+        }
+    }
+
+    @GetMapping("/getAllTasks")
+    public ResponseEntity<?> getAllTasks () {
+        try {
+            List<Task> tasks  =  taskServices.getAllTasks();
+            return ResponseEntity.status(HttpStatus.OK).body(tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch Tasks");
         }
     }
 }

@@ -68,52 +68,53 @@
 
 
     <main class="w-100">
-            <div class="modal fade" tabindex="-1" id="userProfileModalLabel" aria-labelledby="userProfileModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">My Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="userProfileForm">
-                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">
-                            <span class="input-group-text" style="width: 20%;">User ID</span>
-                            <input type="text" id="userId" class="form-control" readonly>
-                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
-                        </div>
-                        <!-- Name -->
-                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">
-                            <span class="input-group-text" style="width: 20%;">Name</span>
-                            <input type="text" id="userName" class="form-control" readonly>
-                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
-                        </div>
-                        <!-- Email -->
-                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">
-                            <span class="input-group-text" style="width: 20%;">Email</span>
-                            <input type="email" id="userEmail" class="form-control" readonly>
-                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
-                        </div>
-                        <!-- Phone -->
-                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">
-                            <span class="input-group-text" style="width: 20%;">Phone</span>
-                            <input type="text" id="userPhone" class="form-control" readonly>
-                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
-                        </div>
-                        <!-- Role -->
-                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">
-                            <span class="input-group-text" style="width: 20%;">Role</span>
-                            <input type="text" id="userRole" class="form-control" readonly>
-                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>
-                        </div>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!--            <div class="modal fade" tabindex="-1" id="userProfileModalLabel" aria-labelledby="userProfileModalLabel" aria-hidden="true">-->
+<!--              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">-->
+<!--                <div class="modal-content">-->
+<!--                  <div class="modal-header">-->
+<!--                    <h5 class="modal-title">My Profile</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                  </div>-->
+<!--                  <div class="modal-body">-->
+<!--                    <form id="userProfileForm">-->
+<!--                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">-->
+<!--                            <span class="input-group-text" style="width: 20%;">User ID</span>-->
+<!--                            <input type="text" id="userId" class="form-control" readonly>-->
+<!--                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Name &ndash;&gt;-->
+<!--                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">-->
+<!--                            <span class="input-group-text" style="width: 20%;">Name</span>-->
+<!--                            <input type="text" id="userName" class="form-control" readonly>-->
+<!--                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Email &ndash;&gt;-->
+<!--                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">-->
+<!--                            <span class="input-group-text" style="width: 20%;">Email</span>-->
+<!--                            <input type="email" id="userEmail" class="form-control" readonly>-->
+<!--                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Phone &ndash;&gt;-->
+<!--                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">-->
+<!--                            <span class="input-group-text" style="width: 20%;">Phone</span>-->
+<!--                            <input type="text" id="userPhone" class="form-control" readonly>-->
+<!--                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Role &ndash;&gt;-->
+<!--                        <div class="input-group mb-3" style="width: 100%; margin: 10px;">-->
+<!--                            <span class="input-group-text" style="width: 20%;">Role</span>-->
+<!--                            <input type="text" id="userRole" class="form-control" readonly>-->
+<!--                            <button class="btn btn-outline-secondary toggle-edit" type="button">Edit</button>-->
+<!--                        </div>-->
+<!--                      </form>-->
+<!--                  </div>-->
+<!--                  <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+        <div th:replace="~{volunteer/fragments :: profilepage}" ></div>
         <div class="bg-image">
             <div class="overlay"></div>
             <div class="content headcontent">

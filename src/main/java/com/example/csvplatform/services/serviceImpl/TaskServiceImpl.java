@@ -109,9 +109,15 @@ public class TaskServiceImpl implements TaskServices {
         taskRepository.save(task);
 
     }
-
+    @Override
     public List<Task> getMyTasks (Integer organisation_id) {
         List<Task> tasks = taskRepository.findByOrganisationId(organisation_id);
+        return tasks;
+    }
+
+    @Override
+    public List<Task> getAllTasks () {
+        List<Task> tasks = taskRepository.findAll();
         return tasks;
     }
 

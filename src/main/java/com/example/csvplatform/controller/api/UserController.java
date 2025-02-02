@@ -7,7 +7,9 @@ import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.User;
 import com.example.csvplatform.entities.VolunteerSkills;
 import com.example.csvplatform.services.UserServices;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/auth")
 public class UserController {
 
@@ -86,9 +89,10 @@ public class UserController {
     }
 
     @PostMapping("/updateVolunteer")
-    public ResponseEntity<?> updateTask (@RequestBody @Valid VolunteerDto volunteerDto) {
+    public ResponseEntity<?> updateTask (@RequestBody @Valid VolunteerDto volunteerDto, HttpSession session) {
         try {
-            userServices.updateVolunteer(volunteerDto);
+            userServices.updateVolunteer(volunteerDto,session);
+
             return ResponseEntity.ok("updated your details successfully");
         } catch (Exception e) {
             System.out.println(e);

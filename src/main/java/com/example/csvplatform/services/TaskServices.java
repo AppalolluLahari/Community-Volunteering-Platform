@@ -14,5 +14,6 @@ public interface TaskServices {
      void updateTask (Integer task_id,TaskDto taskDto );
      void updateStatus (Integer task_id,String status);
      List<Task> getMyTasks (Integer id);
+     List<Task> getAllTasks ();
 //     List<Task> searchTask (Integer task_id);
 }

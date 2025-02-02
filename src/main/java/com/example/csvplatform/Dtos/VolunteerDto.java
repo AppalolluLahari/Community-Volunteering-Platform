@@ -20,17 +20,9 @@ public class VolunteerDto {
     @NotEmpty(message = "Name Cannot be Empty")
     private String name;
 
-    @Email(message = "Email Cannot be Empty")
-    private String email;
-
     @NotEmpty(message = "Phone Number Cannot be Empty")
     private String phone;
 
-    private String role;
-
-    private boolean verified;
-
-    @NotEmpty(message = "Location cannot be empty")
     private String location;
 
     private int ratingScore;

@@ -9,6 +9,7 @@ import com.example.csvplatform.repositories.UserRepository;
 import com.example.csvplatform.repositories.VolunteerRepository;
 import com.example.csvplatform.repositories.VolunteerSkillsRepository;
 import com.example.csvplatform.services.UserServices;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -78,13 +79,12 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     @Transactional
-    public void updateVolunteer(VolunteerDto volunteerDto){
+    public void updateVolunteer(VolunteerDto volunteerDto, HttpSession session){
         Volunteer volunteer = volunteerRepository.findById(volunteerDto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
 
         volunteer.setName(volunteerDto.getName());
         volunteer.setLocation(volunteerDto.getLocation());
-        volunteer.setEmail(volunteerDto.getEmail());
         volunteerRepository.save(volunteer);
 
         volunteerSkillsRepository.deleteByVolunteer_UserId(volunteer.getUserId());
@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserServices {
             skills.add(skill);
         }
         volunteerSkillsRepository.saveAll(skills);
+        volunteer = volunteerRepository.findById(volunteerDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        session.removeAttribute("user");
+        session.setAttribute("user",volunteer);
+
     }
 
     @Override
