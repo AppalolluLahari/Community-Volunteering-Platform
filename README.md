@@ -27,7 +27,7 @@ For Organizations: Access to a pool of dedicated volunteers and streamlined task
 
 Frontend: HTML, CSS, JavaScript, Bootstrap, Thymeleaf
 
-Backend: Spring Boot
+Backend: Spring Boot, Java
 
 Database: MySQL
 
