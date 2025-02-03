@@ -8,6 +8,7 @@ import com.example.csvplatform.entities.Organisation;
 import com.example.csvplatform.entities.User;
 import com.example.csvplatform.entities.Volunteer;
 import com.example.csvplatform.entities.VolunteerSkills;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface UserServices {
 
      void registerUser (UserDto user);
      void deleteUser (Integer user_id);
-     void updateVolunteer (VolunteerDto VolunteerDto);
+     void updateVolunteer (VolunteerDto VolunteerDto, HttpSession session);
      List<User> getUsers ();
      List<Organisation> getOrganisation();
      List<VolunteerDetailsDTO> getTop10Volunteers();

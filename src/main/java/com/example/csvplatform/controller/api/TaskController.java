@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,14 +52,38 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/getAllTasks/{organisation_id}")
+    @GetMapping("/getMyTasks/{organisation_id}")
     public ResponseEntity<?> getAllTasksById (@PathVariable Integer organisation_id) {
         try {
             List<Task> tasks  =  taskServices.getMyTasks(organisation_id);
             return ResponseEntity.status(HttpStatus.OK).body(tasks);
         } catch (Exception e) {
             System.out.println(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task updation failed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch Tasks");
+        }
+    }
+
+    @GetMapping("/getAllTasks")
+    public ResponseEntity<?> getAllTasks () {
+        try {
+            List<Task> tasks  =  taskServices.getAllTasks();
+            return ResponseEntity.status(HttpStatus.OK).body(tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch Tasks");
+        }
+    }
+
+    @PostMapping("/getTask")
+    public String getTaskByTitle(Model model, @RequestParam String title) {
+        try {
+            List<Task> tasks = taskServices.searchTasksByTitle(title);
+            model.addAttribute("tasks", tasks);
+            return "/volunteer/tasks";
+        } catch (Exception e) {
+            System.out.println(e);
+            model.addAttribute("error", "An error occurred while fetching tasks");
+            return "/volunteer/tasks";
         }
     }
 }

@@ -3,7 +3,7 @@ package com.example.csvplatform.services;
 import com.example.csvplatform.dtos.TaskSignUpDto;
 
 public interface TaskSignUpServices {
-    void createTaskSignUp(TaskSignUpDto taskSignUpDto);
+    void createTaskSignUp(Integer id,Integer userId);
 
     void deleteTaskSignUp(Integer signUpId);
 

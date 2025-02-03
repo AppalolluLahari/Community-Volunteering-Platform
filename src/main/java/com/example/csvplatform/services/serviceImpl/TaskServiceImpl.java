@@ -76,6 +76,7 @@ public class TaskServiceImpl implements TaskServices {
     }
 
 
+
     public void updateTask(Integer taskId,TaskDto taskDto) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskId));
@@ -96,6 +97,10 @@ public class TaskServiceImpl implements TaskServices {
         taskRepository.save(task);
     }
 
+    public List<Task> searchTasksByTitle(String name) {
+        return taskRepository.findTasksByTitleContainingIgnoreCase(name);
+    }
+
 
 
     @Override
@@ -109,9 +114,15 @@ public class TaskServiceImpl implements TaskServices {
         taskRepository.save(task);
 
     }
-
+    @Override
     public List<Task> getMyTasks (Integer organisation_id) {
         List<Task> tasks = taskRepository.findByOrganisationId(organisation_id);
+        return tasks;
+    }
+
+    @Override
+    public List<Task> getAllTasks () {
+        List<Task> tasks = taskRepository.getAllTasksWithOrganisation();
         return tasks;
     }
 

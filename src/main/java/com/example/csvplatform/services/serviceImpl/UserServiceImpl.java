@@ -9,9 +9,11 @@ import com.example.csvplatform.repositories.UserRepository;
 import com.example.csvplatform.repositories.VolunteerRepository;
 import com.example.csvplatform.repositories.VolunteerSkillsRepository;
 import com.example.csvplatform.services.UserServices;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,9 @@ public class UserServiceImpl implements UserServices {
     @Autowired
     VolunteerSkillsRepository volunteerSkillsRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void registerUser(UserDto user) {
         if(("Volunteer").equalsIgnoreCase(user.getRole())) {
@@ -40,7 +45,7 @@ public class UserServiceImpl implements UserServices {
             volunteer.setName(user.getName());
             volunteer.setEmail(user.getEmail());
             volunteer.setPhone(user.getPhone());
-            volunteer.setPassword(user.getPassword());
+            volunteer.setPassword(passwordEncoder.encode(user.getPassword()));
             volunteer.setRole(user.getRole().toUpperCase());
             volunteer.setVerified(user.isVerified());
             volunteerRepository.save(volunteer);
@@ -50,7 +55,7 @@ public class UserServiceImpl implements UserServices {
             organisation.setName(user.getName());
             organisation.setEmail(user.getEmail());
             organisation.setPhone(user.getPhone());
-            organisation.setPassword(user.getPassword());
+            organisation.setPassword(passwordEncoder.encode(user.getPassword()));
             organisation.setRole(user.getRole());
             organisation.setVerified(user.isVerified());
             organisationRepository.save(organisation);
@@ -74,13 +79,12 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     @Transactional
-    public void updateVolunteer(VolunteerDto volunteerDto){
+    public void updateVolunteer(VolunteerDto volunteerDto, HttpSession session){
         Volunteer volunteer = volunteerRepository.findById(volunteerDto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
 
         volunteer.setName(volunteerDto.getName());
         volunteer.setLocation(volunteerDto.getLocation());
-        volunteer.setEmail(volunteerDto.getEmail());
         volunteerRepository.save(volunteer);
 
         volunteerSkillsRepository.deleteByVolunteer_UserId(volunteer.getUserId());
@@ -92,6 +96,12 @@ public class UserServiceImpl implements UserServices {
             skills.add(skill);
         }
         volunteerSkillsRepository.saveAll(skills);
+        volunteer = volunteerRepository.findById(volunteerDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        session.removeAttribute("user");
+        session.setAttribute("user",volunteer);
+
     }
 
     @Override

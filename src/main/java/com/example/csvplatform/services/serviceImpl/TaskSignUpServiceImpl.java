@@ -31,26 +31,28 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
     private VolunteerRepository volunteerRepository;
 
     @Override
-    public void createTaskSignUp(TaskSignUpDto taskSignUpDto) {
+    public void createTaskSignUp(Integer taskId,Integer userId) {
         // Verify if the task exists
-        Task task = taskRepository.findById(taskSignUpDto.getTaskId())
-                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskSignUpDto.getTaskId()));
+        LocalDate currDate = LocalDate.now();
+        LocalDate cancelationDeadLine = currDate.plusDays(3);
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskId));
 
-        Volunteer volunteer = volunteerRepository.findById(taskSignUpDto.getVolunteerId())
-                .orElseThrow(() -> new RuntimeException("Volunteer not found with ID: " + taskSignUpDto.getVolunteerId()));
+        Volunteer volunteer = volunteerRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Volunteer not found with ID: " + userId));
 
         //Setting the task status to Taken
         taskServices.updateStatus(task.getTaskId(), "Taken");
 
         // Map DTO to Entity
         TaskSignUp taskSignUp = new TaskSignUp();
-        taskSignUp.setVolunteerId(taskSignUpDto.getVolunteerId());
+        taskSignUp.setVolunteerId(userId);
         taskSignUp.setTaskId(task.getTaskId());
-        taskSignUp.setSignedUpDate(taskSignUpDto.getSignedUpDate());
-        taskSignUp.setCompletionDate(taskSignUpDto.getCompletionDate());
-        taskSignUp.setCancellationDate(taskSignUpDto.getCancellationDate());
-        taskSignUp.setStatus(taskSignUpDto.getStatus());
-        taskSignUp.setRemainderSent(taskSignUpDto.getRemainderSent());
+        taskSignUp.setSignedUpDate(currDate);
+        taskSignUp.setCompletionDate(null);
+        taskSignUp.setCancellationDate(cancelationDeadLine);
+        taskSignUp.setStatus("In Progress");
+        taskSignUp.setRemainderSent(false);
 
         // Save the task signup
         taskSignupRepository.save(taskSignUp);

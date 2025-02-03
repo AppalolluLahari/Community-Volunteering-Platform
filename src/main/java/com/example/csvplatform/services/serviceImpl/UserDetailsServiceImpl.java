@@ -1,5 +1,6 @@
 package com.example.csvplatform.services.serviceImpl;
 
+import com.example.csvplatform.entities.User;
 import com.example.csvplatform.entities.Volunteer;
 import com.example.csvplatform.repositories.UserRepository;
 import com.example.csvplatform.repositories.VolunteerRepository;
@@ -23,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Volunteer user = volunteerRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
@@ -34,4 +35,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .roles(user.getRole())
                 .build();
     }
+
 }
