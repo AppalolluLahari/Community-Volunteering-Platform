@@ -210,6 +210,51 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Dynamic Modals for each volunteer -->
+<div th:each="volunteer : ${volunteers}">
+    <div class="modal fade" th:id="'volunteerModal' + ${volunteer.volunteerId}" tabindex="-1"
+         th:aria-labelledby="'volunteerModalLabel' + ${volunteer.volunteerId}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="${volunteer.name}"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Volunteer ID</th>
+                                <td th:text="${volunteer.volunteerId}"></td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td th:text="${volunteer.name}"></td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td th:text="${volunteer.phoneNumber}"></td>
+                            </tr>
+                            <tr>
+                                <th>Rank</th>
+                                <td th:text="${volunteer.rank}"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td th:text="${volunteer.email}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div>
 
     </main>
