@@ -74,16 +74,16 @@ public class TaskController {
         }
     }
 
-    @PostMapping("/getTask")
-    public String getTaskByTitle(Model model, @RequestParam String title) {
+
+
+    @GetMapping("/getTask/{title}")
+    public ResponseEntity<?> getAllTasks (@PathVariable String title) {
         try {
             List<Task> tasks = taskServices.searchTasksByTitle(title);
-            model.addAttribute("tasks", tasks);
-            return "/volunteer/tasks";
+            return ResponseEntity.status(HttpStatus.OK).body(tasks);
         } catch (Exception e) {
             System.out.println(e);
-            model.addAttribute("error", "An error occurred while fetching tasks");
-            return "/volunteer/tasks";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch Tasks");
         }
     }
 }

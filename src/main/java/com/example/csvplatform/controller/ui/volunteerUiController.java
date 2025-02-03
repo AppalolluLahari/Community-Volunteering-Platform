@@ -76,34 +76,24 @@ public class VolunteerUiController {
         return "/volunteer/tasks";
     }
 
-//    @PostMapping("/getTask")
-//    public String getTaskByTitleView(Model model, @RequestParam String title, HttpSession session) {
-//        try {
-//            // Fetch tasks by title using the service layer
-//            var tasks = restClient.get()
-//                    .uri("/task/searchTasksByTitle")
-//                    .cookie("JSESSIONID", session.getId())
-//                    .queryParam("title", title)
-//                    .retrieve()
-//                    .body(new ParameterizedTypeReference<List<Task>>() {});
-//
-//            System.out.println(tasks); // Debugging: Print the fetched tasks
-//            model.addAttribute("tasks", tasks); // Add tasks to the model
-//        } catch (Exception e) {
-//            System.out.println(e); // Log the exception
-//            model.addAttribute("error", "An error occurred while fetching tasks"); // Add an error message
-//        }
-//        return "volunteer/tasks"; // Return the view name
-//    }
+    @PostMapping("/getTask")
+    public String getTaskByTitleView(Model model, @RequestParam String title, HttpSession session) {
+        try {
+            // Fetch tasks by title using the service layer
+            var tasks = restClient.get()
+                    .uri("/task/getTask/"+title)
+                    .cookie("JSESSIONID", session.getId())
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<List<Task>>() {});
 
-
-
-
-
-
-
-
-
+            System.out.println(tasks);
+            model.addAttribute("tasks", tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+            model.addAttribute("error", "An error occurred while fetching tasks"); // Add an error message
+        }
+        return "volunteer/tasks";
+    }
 
 
 
