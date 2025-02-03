@@ -6,5 +6,6 @@ import com.example.csvplatform.entities.Organisation;
 
 public interface OrganisationRepository extends JpaRepository<Organisation,Integer> {
     Organisation findByEmail(String email);
+
 }
 

@@ -4,9 +4,14 @@ package com.example.csvplatform.controller.ui;
 import com.example.csvplatform.dtos.viewModels.LoginViewModel;
 import com.example.csvplatform.dtos.viewModels.RegisterViewModel;
 import com.example.csvplatform.dtos.viewModels.VolunteerUpdateViewModel;
+import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.services.TaskServices;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 import org.springframework.boot.Banner;
@@ -14,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 import static com.example.csvplatform.configuration.ToastUtil.addToast;
 
@@ -25,6 +32,7 @@ public class VolunteerUiController {
     private final RestClient restClient;
 
     private final TaskServices taskServices;
+
 
 
     @GetMapping("/home")
@@ -39,7 +47,7 @@ public class VolunteerUiController {
     }
 
     @GetMapping("/rating")
-    public String ratingView (Model model) {
+    public String ratingView ( ) {
         return "/volunteer/rating";
     }
 
@@ -48,13 +56,17 @@ public class VolunteerUiController {
         return "/volunteer/search-filter";
     }
 
-    @GetMapping("/tasks")
-    public String tasksView (Model model) {
+
+
+    @GetMapping("/alltasks")
+    public String tasksView (Model model,HttpSession session) {
+
         try {
             var tasks = restClient.get()
                     .uri("/task/getAllTasks")
+                    .cookie("JSESSIONID", session.getId())
                     .retrieve()
-                    .toEntity(String.class);
+                    .body(new ParameterizedTypeReference<List<Task>>() {});
             System.out.println(tasks);
             model.addAttribute("tasks",tasks);
 
@@ -63,6 +75,33 @@ public class VolunteerUiController {
         }
         return "/volunteer/tasks";
     }
+
+//    @PostMapping("/getTask")
+//    public String getTaskByTitleView(Model model, @RequestParam String title, HttpSession session) {
+//        try {
+//            // Fetch tasks by title using the service layer
+//            var tasks = restClient.get()
+//                    .uri("/task/searchTasksByTitle")
+//                    .cookie("JSESSIONID", session.getId())
+//                    .queryParam("title", title)
+//                    .retrieve()
+//                    .body(new ParameterizedTypeReference<List<Task>>() {});
+//
+//            System.out.println(tasks); // Debugging: Print the fetched tasks
+//            model.addAttribute("tasks", tasks); // Add tasks to the model
+//        } catch (Exception e) {
+//            System.out.println(e); // Log the exception
+//            model.addAttribute("error", "An error occurred while fetching tasks"); // Add an error message
+//        }
+//        return "volunteer/tasks"; // Return the view name
+//    }
+
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.example.csvplatform.controller.api;
 
+
 import com.example.csvplatform.dtos.TaskSignUpDto;
 import com.example.csvplatform.services.TaskServices;
 import com.example.csvplatform.services.TaskSignUpServices;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 @Controller
 @RestController
@@ -21,15 +23,25 @@ public class TaskSignUpController {
     @Autowired
     private TaskSignUpServices taskSignUpServices;
 
-    @PostMapping("/signUpTask")
-    public ResponseEntity<?> signUpTask(@RequestBody @Valid TaskSignUpDto taskSignUpDto) {
-        try {
-            taskSignUpServices.createTaskSignUp(taskSignUpDto);
-            return ResponseEntity.status(HttpStatus.OK).body("Successfully SignedUp for task");
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to signup for task");
+//    @GetMapping("/signUpTask/{id}/{userId}")
+//    public ResponseEntity<?> signUpTask(@PathVariable Integer id,@PathVariable Integer userId) {
+//        try {
+//            taskSignUpServices.createTaskSignUp(id,userId);
+//            return ResponseEntity.status(HttpStatus.OK).body("Successfully SignedUp for task");
+//        }catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to signup for task");
+//        }
+//    }
+        @GetMapping("/signUpTask/{id}/{userId}")
+        public String signUpTask(Model model, @PathVariable Integer id, @PathVariable Integer userId) {
+            try {
+                taskSignUpServices.createTaskSignUp(id,userId);
+                return "/volunteer/tasks";
+            }catch (Exception e) {
+                model.addAttribute("Error",e);
+                return "/volunteer/tasks";
+            }
         }
-    }
 
     @DeleteMapping("/deleteTaskSignUp/{signUpId}")
     public ResponseEntity<?> deleteTaskSignUp(@PathVariable Integer signUpId) {
