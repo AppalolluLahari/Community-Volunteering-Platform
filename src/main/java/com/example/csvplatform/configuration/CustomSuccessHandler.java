@@ -40,14 +40,18 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         // Check if the user is a Volunteer
         if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_VOLUNTEER"))) {
             Volunteer volunteer = volunteerRepository.findByEmail(email);
+            System.out.println("Authenticated Email: " + email);
+            System.out.println("Authorities: " + authorities);
             if (volunteer != null) {
                 session.setAttribute("user", volunteer);
             }
             response.sendRedirect("/volunteer/home");
         }
         // Check if the user is an Organization
-        else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ORGANIZATION"))) {
+        else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_organization"))) {
             Organisation organization = organisationRepository.findByEmail(email);
+            System.out.println("Authenticated Email: " + email);
+            System.out.println("Authorities: " + authorities);
             if (organization != null) {
                 session.setAttribute("user", organization);
             }

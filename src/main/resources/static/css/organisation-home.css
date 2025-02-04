@@ -81,10 +81,10 @@ body {
 }
 
 .bg-image {
-  background-image: url("./wmremove-transformed-L8_G3hYjB-transformed.jpeg"); /* Replace with your image URL */
+  background-image: url("../images/wmremove-transformed-L8_G3hYjB-transformed.jpeg");
   background-size: cover;
   background-position: center;
-  height: 70vh; /* Full viewport height */
+  height: 70vh;
   position: relative;
   color: white;
 }
