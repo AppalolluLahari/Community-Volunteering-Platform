@@ -1,21 +1,22 @@
 package com.example.csvplatform.controller.ui;
 
 
-import com.example.csvplatform.dtos.viewModels.LoginViewModel;
-import com.example.csvplatform.dtos.viewModels.RegisterViewModel;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.Banner;
+import static com.example.csvplatform.configuration.ToastUtil.*;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.client.RestClient;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.ModelAndView;
 
-import static com.example.csvplatform.configuration.ToastUtil.addToast;
+import com.example.csvplatform.dtos.viewModels.LoginViewModel;
+import com.example.csvplatform.dtos.viewModels.RegisterViewModel;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class authUiController {
 
     @PostMapping("/volunteerlogin")
     public ModelAndView volunteerloginView(@ModelAttribute LoginViewModel model) {
-         ModelAndView mv = new ModelAndView("");
+         ModelAndView mv ;
         try {
             var response = restClient.post()
                     .uri("/volunteer_login")
@@ -56,14 +57,40 @@ public class authUiController {
         } catch (Exception e) {
             mv = new ModelAndView("volunteerlogin");
             mv.addObject("login",new LoginViewModel());
-            addToast(mv, "Registration failed. Please try again.", "danger");
+            addToast(mv, "Login attempt failed. Please try again.", "danger");
         }
         return mv;
     }
 
     @GetMapping("/organisationlogin")
-    public String organisationloginView () {
-        return "organisationlogin";
+    public ModelAndView organisationLoginView () {
+        ModelAndView mv= new ModelAndView("organisationlogin","login",new LoginViewModel());
+        return mv;
+    }
+
+    @PostMapping("/organisationlogin")
+    public ModelAndView organisationLoginView(@ModelAttribute LoginViewModel model) {
+        ModelAndView mv ;
+        try {
+            var response = restClient.post()
+                    .uri("/organisation_login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(model)
+                    .retrieve()
+                    .toEntity(String.class);
+
+            ModelAndView mv1= new ModelAndView("organisation/organisation-home");
+            System.out.println(response);
+            mv1.addObject("response", response);
+            addToast(mv1, "Successfully LoggedIn", "success");
+            return mv1;
+
+        } catch (Exception e) {
+            mv = new ModelAndView("organisationlogin");
+            mv.addObject("login",new LoginViewModel());
+            addToast(mv, "Login attempt failed. Please try again.", "danger");
+        }
+        return mv;
     }
 
     @GetMapping("/register")

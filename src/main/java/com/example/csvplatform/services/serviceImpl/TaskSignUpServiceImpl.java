@@ -1,19 +1,20 @@
 package com.example.csvplatform.services.serviceImpl;
 
-import com.example.csvplatform.entities.Volunteer;
-import com.example.csvplatform.repositories.VolunteerRepository;
-import com.example.csvplatform.services.TaskServices;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.csvplatform.dtos.TaskSignUpDto;
 import com.example.csvplatform.entities.Task;
 import com.example.csvplatform.entities.TaskSignUp;
+import com.example.csvplatform.entities.Volunteer;
 import com.example.csvplatform.repositories.TaskRepository;
 import com.example.csvplatform.repositories.TaskSignUpRepository;
+import com.example.csvplatform.repositories.VolunteerRepository;
+import com.example.csvplatform.services.TaskServices;
 import com.example.csvplatform.services.TaskSignUpServices;
-
-import java.time.LocalDate;
 
 @Service
 public class TaskSignUpServiceImpl implements TaskSignUpServices {
@@ -112,5 +113,11 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
         }
         signUpDetails.setStatus(status);
         taskSignupRepository.save(signUpDetails);
+    }
+
+    @Override
+    public List<TaskSignUp> getSignedUpTasks(Integer id) {
+        List<TaskSignUp> signedUpTasks = taskSignupRepository.findByVolunteerId(id);
+        return signedUpTasks;
     }
 }

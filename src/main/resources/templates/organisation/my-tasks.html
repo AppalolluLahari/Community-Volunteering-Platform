@@ -98,7 +98,71 @@
             <div class="tasks-area">
                 <div class="d-flex justify-content-between">
                     <h5 class="display-6 fw-bold">My Tasks</h5>
-                    <a class="btn btn-success" th:href="@{/taskCreation}">Create New Task</a>
+
+
+                    <!-- Create New Task Button -->
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskCreationModal">Create New Task</button>
+
+<!-- Task Creation Modal -->
+<div class="modal fade" id="taskCreationModal" tabindex="-1" aria-labelledby="taskCreationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskCreationModalLabel">Create a New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="taskCreationForm" th:action="@{/organisation/tasks/create}" method="POST">
+                    <div class="form-group">
+                        <label for="taskTitle">Task Title</label>
+                        <input type="text" id="taskTitle" name="taskTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description</label>
+                        <textarea id="taskDescription" name="taskDescription" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskCategory">Category</label>
+                        <select id="taskCategory" name="taskCategory" class="form-select" required>
+                            <option value="" th:selected="${task.category == null}" disabled>Select a category</option>
+                            <option value="Software Development">Software Development</option>
+                            <option value="Teaching">Teaching</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Community Service">Community Service</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskSkills">Required Skills</label>
+                        <input type="text" id="taskSkills" name="taskSkills" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskLocation">Location</label>
+                        <input type="text" id="taskLocation" name="taskLocation" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskStartDate">Start Date</label>
+                        <input type="date" id="taskStartDate" name="taskStartDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskEndDate">End Date</label>
+                        <input type="date" id="taskEndDate" name="taskEndDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskCancellationDeadline">Cancellation Deadline</label>
+                        <input type="date" id="taskCancellationDeadline" name="taskCancellationDeadline" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
                 </div>
                 <div class="cards-area">
                     <div class="card">
@@ -122,7 +186,12 @@
                                 <div><strong>End Date:</strong> 20-01-2025</div>
                             </div>
                             <div class="d-flex flex-column gap-2">
+
+
                                 <a th:href="@{/taskUpdation}" class="btn btn-primary">Edit</a>
+
+
+                                
                                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                     data-bs-target="#taskDetailsModal">
                                     View

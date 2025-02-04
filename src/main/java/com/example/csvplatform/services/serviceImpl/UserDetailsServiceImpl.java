@@ -1,14 +1,14 @@
 package com.example.csvplatform.services.serviceImpl;
 
-import com.example.csvplatform.entities.User;
-import com.example.csvplatform.entities.Volunteer;
-import com.example.csvplatform.repositories.UserRepository;
-import com.example.csvplatform.repositories.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.example.csvplatform.entities.User;
+import com.example.csvplatform.repositories.UserRepository;
+import com.example.csvplatform.repositories.VolunteerRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,8 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("Fetching User with Email: " + email);
         User user = userRepository.findByEmail(email);
         if (user == null) {
+            System.out.println("No user foung");
             throw new UsernameNotFoundException("User not found");
         }
         System.out.println("Fetching User Details");
