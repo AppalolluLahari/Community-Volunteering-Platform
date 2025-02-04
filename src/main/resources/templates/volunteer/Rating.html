@@ -58,58 +58,7 @@
 </head>
 
 <body>
-<!--    <nav class="navbar custom-navbar navbar-expand-lg">-->
-<!--        <div class="container-fluid">-->
-<!--            <a class="navbar-brand d-flex align-items-center" href="#">-->
-<!--                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6j95mDNtjlabAxUewbAcxvJnU9w4P7Iu0Og&s" alt="Logo" class="logoimg" style="width: 50px; height: 50px; border-radius: 10px;">-->
-<!--                <span class="ms-2">Volunteer Platform</span>-->
-<!--            </a>-->
-<!--                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                    <span class="navbar-toggler-icon"></span>-->
-<!--                </button>-->
-<!--                <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--                    <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link active" href="./home.html">Home</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="./Tasks.html">Tasks</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="./Rating.html">Rating</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="./search-filter.html" >Filter</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item d-lg-none">-->
-<!--                            <div class="dropdown-center">-->
-<!--                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                                    More-->
-<!--                                </button>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>-->
-<!--                                  <li><a class="dropdown-item" href="./my-tasks.html">My Tasks</a></li>-->
-<!--                                  <li><a class="dropdown-item" href="../home.html">Logout</a></li>-->
-<!--                                </ul>-->
-<!--                              </div>-->
-<!--                        </li>-->
 
-<!--                    </ul>-->
-<!--                    -->
-<!--                </div>-->
-<!--                <div class="dropdown d-none d-lg-block">-->
-<!--                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                        <i class="bi bi-person-circle"></i>-->
-<!--                    </button>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModalLabel">Profile</a></li>-->
-<!--                        <li><a class="dropdown-item" href="./my-tasks.html">My Tasks</a></li>-->
-<!--                        <li><a class="dropdown-item" href="../home.html">Logout</a></li>-->
-<!--                    </ul>-->
-<!--                  </div>-->
-<!--        </div>-->
-
-<!--    </nav>-->
     <div th:replace="~{volunteer/fragments :: navbar}"></div>
 
     <main class="w-100 ">
@@ -132,7 +81,9 @@
                             <td>John Doe</td>
                             <td>4.9</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal1">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -140,7 +91,9 @@
                             <td>Jane Smith</td>
                             <td>4.8</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal2">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -148,7 +101,9 @@
                             <td>Alex Johnson</td>
                             <td>4.7</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal3">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -156,7 +111,9 @@
                             <td>Emily Davis</td>
                             <td>4.7</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal4">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -164,7 +121,9 @@
                             <td>Michael Brown</td>
                             <td>4.6</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal5">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -172,7 +131,9 @@
                             <td>Sarah Wilson</td>
                             <td>4.5</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal6">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -180,7 +141,9 @@
                             <td>Chris Lee</td>
                             <td>4.4</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal7">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -188,7 +151,9 @@
                             <td>Anna White</td>
                             <td>4.3</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal8">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -196,7 +161,9 @@
                             <td>David Taylor</td>
                             <td>4.2</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal9">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -204,59 +171,280 @@
                             <td>Linda Martinez</td>
                             <td>4.1</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">View Profile</a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal10">
+                                    View Profile
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                    <!-- Dynamic Modals for Each Volunteer -->
+                    <div class="modal fade" id="ratingModal1" tabindex="-1" aria-labelledby="ratingModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">John Doe</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr><th>Volunteer ID</th>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr><th>Name</th><td>John Doe</td></tr>
+                                            <tr><th>Phone Number</th><td>+1234567890</td></tr>
+                                            <tr><th>Rank</th><td>1</td></tr>
+                                            <tr><th>Email</th><td>john.doe@example.com</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Dynamic Modals for each volunteer -->
-<div th:each="volunteer : ${volunteers}">
-    <div class="modal fade" th:id="'volunteerModal' + ${volunteer.volunteerId}" tabindex="-1"
-         th:aria-labelledby="'volunteerModalLabel' + ${volunteer.volunteerId}" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" th:text="${volunteer.name}"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th>Volunteer ID</th>
-                                <td th:text="${volunteer.volunteerId}"></td>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <td th:text="${volunteer.name}"></td>
-                            </tr>
-                            <tr>
-                                <th>Phone Number</th>
-                                <td th:text="${volunteer.phoneNumber}"></td>
-                            </tr>
-                            <tr>
-                                <th>Rank</th>
-                                <td th:text="${volunteer.rank}"></td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td th:text="${volunteer.email}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal fade" id="ratingModal2" tabindex="-1" aria-labelledby="ratingModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Jane Smith</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr><th>Volunteer ID</th><td>2</td></tr>
+                                            <tr><th>Name</th><td>Jane Smith</td></tr>
+                                            <tr><th>Phone Number</th><td>+1234567891</td></tr>
+                                            <tr><th>Rank</th><td>2</td></tr>
+                                            <tr><th>Email</th><td>jane.smith@example.com</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Volunteer 3 -->
+                    <div class="modal fade" id="ratingModal3" tabindex="-1" aria-labelledby="ratingModalLabel3" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Alex Johnson</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr><th>Volunteer ID</th><td>3</td></tr>
+                                            <tr><th>Name</th><td>Alex Johnson</td></tr>
+                                            <tr><th>Phone Number</th><td>+1234567892</td></tr>
+                                            <tr><th>Rank</th><td>3</td></tr>
+                                            <tr><th>Email</th><td>alex.johnson@example.com</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Volunteer 4 -->
+                    <div class="modal fade" id="ratingModal4" tabindex="-1" aria-labelledby="ratingModalLabel4" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Emily Davis</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr><th>Volunteer ID</th><td>4</td></tr>
+                                            <tr><th>Name</th><td>Emily Davis</td></tr>
+                                            <tr><th>Phone Number</th><td>+1234567893</td></tr>
+                                            <tr><th>Rank</th><td>4</td></tr>
+                                            <tr><th>Email</th><td>emily.davis@example.com</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Volunteer 5 -->
+<div class="modal fade" id="ratingModal5" tabindex="-1" aria-labelledby="ratingModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Michael Brown</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>5</td></tr>
+                        <tr><th>Name</th><td>Michael Brown</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567894</td></tr>
+                        <tr><th>Rank</th><td>5</td></tr>
+                        <tr><th>Email</th><td>michael.brown@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Volunteer 6 -->
+<div class="modal fade" id="ratingModal6" tabindex="-1" aria-labelledby="ratingModalLabel6" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sarah Wilson</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>6</td></tr>
+                        <tr><th>Name</th><td>Sarah Wilson</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567895</td></tr>
+                        <tr><th>Rank</th><td>6</td></tr>
+                        <tr><th>Email</th><td>sarah.wilson@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
+    </div>
+</div>
 
+<!-- Volunteer 7 -->
+<div class="modal fade" id="ratingModal7" tabindex="-1" aria-labelledby="ratingModalLabel7" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chris Lee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>7</td></tr>
+                        <tr><th>Name</th><td>Chris Lee</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567896</td></tr>
+                        <tr><th>Rank</th><td>7</td></tr>
+                        <tr><th>Email</th><td>chris.lee@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Volunteer 8 -->
+<div class="modal fade" id="ratingModal8" tabindex="-1" aria-labelledby="ratingModalLabel8" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Anna White</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>8</td></tr>
+                        <tr><th>Name</th><td>Anna White</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567897</td></tr>
+                        <tr><th>Rank</th><td>8</td></tr>
+                        <tr><th>Email</th><td>anna.white@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Volunteer 9 -->
+<div class="modal fade" id="ratingModal9" tabindex="-1" aria-labelledby="ratingModalLabel9" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">David Taylor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>9</td></tr>
+                        <tr><th>Name</th><td>David Taylor</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567898</td></tr>
+                        <tr><th>Rank</th><td>9</td></tr>
+                        <tr><th>Email</th><td>david.taylor@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Volunteer 10 -->
+<div class="modal fade" id="ratingModal10" tabindex="-1" aria-labelledby="ratingModalLabel10" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Linda Martinez</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Volunteer ID</th><td>10</td></tr>
+                        <tr><th>Name</th><td>Linda Martinez</td></tr>
+                        <tr><th>Phone Number</th><td>+1234567899</td></tr>
+                        <tr><th>Rank</th><td>10</td></tr>
+                        <tr><th>Email</th><td>linda.martinez@example.com</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    
+            </div>
+        </div>
+                   
     </main>
 
     <div th:replace="~{volunteer/fragments :: footer}"></div>
