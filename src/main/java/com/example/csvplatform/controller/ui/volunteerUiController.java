@@ -41,14 +41,26 @@ public class VolunteerUiController {
     }
 
     @GetMapping("/my_tasks")
-    public String myTasksView (Model model) {
+    public String myTasksView (Model model,HttpSession session) {
+        try {
+            var tasks = restClient.get()
+                    .uri("/task/getAllTasks")
+                    .cookie("JSESSIONID", session.getId())
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<List<Task>>() {});
+            System.out.println(tasks);
+            model.addAttribute("tasks",tasks);
+
+        } catch (Exception e) {
+            model.addAttribute("error", "An error Occured while Fetching Data");
+        }
         return "/volunteer/my-tasks";
     }
 
-    @GetMapping("/rating")
-    public String ratingView ( ) {
-        return "/volunteer/rating";
-    }
+//    @GetMapping("/rating")
+//    public String ratingView ( ) {
+//        return "/volunteer/rating";
+//    }
 
     @GetMapping("/search_filter")
     public String searchFilterView (Model model) {
@@ -98,13 +110,13 @@ public class VolunteerUiController {
     
 
     
-    @GetMapping("/top10volunteers")
+    @GetMapping("/rating")
     public String top10VolunteersView(Model model, HttpSession session) {
 
         try {
             // Fetching the top 10 volunteers (This could be from your service or an API)
             var volunteers = restClient.get()
-                    .uri("/volunteer/getTop10Volunteers")  // Update the URI accordingly
+                    .uri("/auth/getVolunteers/top10")  // Update the URI accordingly
                     .cookie("JSESSIONID", session.getId())
                     .retrieve()
                     .body(new ParameterizedTypeReference<List<Volunteer>>() {});  // Assuming Volunteer class exists
@@ -117,7 +129,7 @@ public class VolunteerUiController {
         }
 
         // Returning the view for the top 10 volunteers
-        return "/volunteer/top10volunteers";  // Path to the view template
+        return "/volunteer/rating";
     }
 }
 

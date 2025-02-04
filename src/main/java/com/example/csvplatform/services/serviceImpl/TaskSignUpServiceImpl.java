@@ -14,6 +14,7 @@ import com.example.csvplatform.repositories.TaskSignUpRepository;
 import com.example.csvplatform.services.TaskSignUpServices;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class TaskSignUpServiceImpl implements TaskSignUpServices {
@@ -112,5 +113,11 @@ public class TaskSignUpServiceImpl implements TaskSignUpServices {
         }
         signUpDetails.setStatus(status);
         taskSignupRepository.save(signUpDetails);
+    }
+
+    @Override
+    public List<TaskSignUp> getSignedUpTasks(Integer id) {
+        List<TaskSignUp> signedUpTasks = taskSignupRepository.findByVolunteerId(id);
+        return signedUpTasks;
     }
 }
